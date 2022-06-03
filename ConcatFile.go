@@ -1,3 +1,4 @@
+//go:generate goversioninfo -icon=ConcatFile.ico -manifest=ConcatFile.exe.manifest
 package main
 
 import (
