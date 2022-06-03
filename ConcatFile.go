@@ -1,4 +1,4 @@
-package ConcatFile
+package main
 
 import "ConcatFile/pkg"
 
