@@ -1,7 +1,21 @@
 package pkg
 
-import "github.com/tealeg/xlsx"
+import (
+	"ConcatFile/loger"
+	"FilesDIR/pkg"
+	"github.com/tealeg/xlsx"
+)
 
-type Exl struct {
+var (
 	Wb *xlsx.File
+)
+
+func CreateExcelFile() {
+
+	Wb = xlsx.NewFile()
+
+	err := Wb.Save(pkg.GetCurrentDir())
+	if err != nil {
+		loger.Crash("Erreur lors de la création du fichier Excel", err)
+	}
 }
