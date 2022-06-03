@@ -1,0 +1,5 @@
+package ConcatFile
+
+func main() {
+
+}
