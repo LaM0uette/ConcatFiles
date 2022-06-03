@@ -13,3 +13,9 @@ func GetCurrentDir() string {
 	}
 	return pwd
 }
+
+func CreateNewFolder(path string) {
+	if err := os.MkdirAll(path, os.ModePerm); err != nil {
+		loger.Crash("Erreur durant la création du dossier", err)
+	}
+}
