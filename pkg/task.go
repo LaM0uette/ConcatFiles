@@ -17,18 +17,18 @@ func GetCurrentDir() string {
 
 func CreateNewFolder(path string) {
 	if err := os.MkdirAll(path, os.ModePerm); err != nil {
-		loger.Crash("Erreur durant la création du dossier", err)
+		loger.Error("Erreur durant la création du dossier", err)
 	}
 }
 
 func CopyFile(srcFile, dstFile string) {
 	input, err := ioutil.ReadFile(srcFile)
 	if err != nil {
-		loger.Crash("Erreur durant la copie du fichier (copier)", err)
+		loger.Error("Erreur durant la copie du fichier (copier)", err)
 	}
 
 	err = ioutil.WriteFile(dstFile, input, 0644)
 	if err != nil {
-		loger.Crash("Erreur durant la copie du fichier (coller)", err)
+		loger.Error("Erreur durant la copie du fichier (coller)", err)
 	}
 }

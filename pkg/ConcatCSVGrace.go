@@ -36,7 +36,7 @@ func (d *Data) GetFolderDLG() string {
 	})
 
 	if err != nil {
-		loger.Crash("Crash pendant le listing des dossiers", err)
+		loger.Error("Error pendant le listing des dossiers", err)
 	}
 
 	return dlg
