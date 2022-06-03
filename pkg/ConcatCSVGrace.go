@@ -12,9 +12,6 @@ func (d *Data) ConcatCSVGrace() {
 
 	DrawSep("CONCAT CSV GRACE")
 
-	DrawParam("CREATION DU DOSSIER")
-	CreateNewFolder(path.Join(GetCurrentDir(), "csv"))
-
 	d.GetFolderDLG()
 
 	DrawParam("COPIE DES CSV")

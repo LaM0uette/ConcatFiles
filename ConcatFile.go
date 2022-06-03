@@ -22,6 +22,9 @@ func main() {
 		DstFile: path.Join(pt, "__Concat__"),
 	}
 
+	pkg.DrawParam("CREATION DU DOSSIER")
+	pkg.CreateNewFolder(d.DstFile)
+
 	d.CreateExcelFile()
 
 	switch *FlgMode {
