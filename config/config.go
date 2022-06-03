@@ -1,7 +1,7 @@
 package config
 
 const (
-	Name    = "ConcatFile"
+	Name    = "ConcatFiles"
 	Author  = "LaM0uette"
 	Version = "0.2"
 )

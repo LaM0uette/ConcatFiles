@@ -1,9 +1,9 @@
 package pkg
 
 import (
-	"ConcatFile/config"
-	"ConcatFile/loger"
-	"ConcatFile/rgb"
+	"ConcatFiles/config"
+	"ConcatFiles/loger"
+	"ConcatFiles/rgb"
 	"fmt"
 	"time"
 )

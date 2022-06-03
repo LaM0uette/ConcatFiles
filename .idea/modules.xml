@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/ConcatFile.iml" filepath="$PROJECT_DIR$/.idea/ConcatFile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ConcatFiles.iml" filepath="$PROJECT_DIR$/.idea/ConcatFiles.iml" />
     </modules>
   </component>
 </project>

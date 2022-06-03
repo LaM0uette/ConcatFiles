@@ -21,14 +21,14 @@
   "StringFileInfo": {
     "Comments": "",
     "CompanyName": "LaM0uette",
-    "FileDescription": "ConcatFile 0.2",
+    "FileDescription": "ConcatFiles 0.2",
     "FileVersion": "0.2",
-    "InternalName": "ConcatFile",
+    "InternalName": "ConcatFiles",
     "LegalCopyright": "© 2022 - 2030 LaM0uette",
     "LegalTrademarks": "",
-    "OriginalFilename": "ConcatFile.exe",
+    "OriginalFilename": "ConcatFiles.exe",
     "PrivateBuild": "",
-    "ProductName": "ConcatFile",
+    "ProductName": "ConcatFiles",
     "ProductVersion": "0.2",
     "SpecialBuild": ""
   },

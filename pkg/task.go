@@ -1,7 +1,7 @@
 package pkg
 
 import (
-	"ConcatFile/loger"
+	"ConcatFiles/loger"
 	"io/ioutil"
 	"os"
 )

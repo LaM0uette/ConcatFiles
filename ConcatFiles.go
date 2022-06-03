@@ -1,10 +1,10 @@
-//go:generate goversioninfo -icon=ConcatFile.ico -manifest=ConcatFile.exe.manifest
+//go:generate goversioninfo -icon=ConcatFiles.ico -manifest=ConcatFiles.exe.manifest
 package main
 
 import (
-	"ConcatFile/loger"
-	"ConcatFile/pkg"
-	"ConcatFile/rgb"
+	"ConcatFiles/loger"
+	"ConcatFiles/pkg"
+	"ConcatFiles/rgb"
 	"bufio"
 	"flag"
 	"os"
