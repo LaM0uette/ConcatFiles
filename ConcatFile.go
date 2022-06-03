@@ -16,7 +16,7 @@ func main() {
 
 	d := pkg.Data{
 		SrcFile: "T:\\RIP FTTH\\GEOMAP\\5_EXPORTS\\RIP40\\NRO7_PM3_NISY\\DOE_1_100%\\V12\\DLG",
-		DstFile: path.Join(pkg.GetCurrentDir(), "csv"),
+		DstFile: path.Join(pkg.GetCurrentDir(), "__Concat__"),
 	}
 
 	d.CreateExcelFile()

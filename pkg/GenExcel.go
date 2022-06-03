@@ -28,7 +28,7 @@ func (d *Data) CreateExcelFile() {
 		loger.Crash("Erreur lors de la création de l'onglet Export", err)
 	}
 
-	err = Wb.Save(path.Join(d.SrcFile, fmt.Sprintf("Export_%v.xlsx", time.Now().Format("20060102150405"))))
+	err = Wb.Save(path.Join(d.DstFile, fmt.Sprintf("__Export_%v.xlsx", time.Now().Format("20060102150405"))))
 	if err != nil {
 		loger.Crash("Erreur lors de la sauvergarde du fichier Excel", err)
 	}
