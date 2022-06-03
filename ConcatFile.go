@@ -19,7 +19,7 @@ func main() {
 	pkg.DrawStart()
 	pkg.DrawSep("BUILD")
 
-	pt := "T:\\RIP FTTH\\GEOMAP\\5_EXPORTS\\RIP40\\NRO7_PM3_NISY\\DOE_1_100%\\V12\\DLG"
+	pt := "T:\\RIP FTTH\\GEOMAP\\5_EXPORTS\\RIP40\\NRO11_PM12_MUGE\\DOE_1_100%\\V8\\DLG"
 	//pt := SrcFile: pkg.GetCurrentDir(),
 
 	d := pkg.Data{
