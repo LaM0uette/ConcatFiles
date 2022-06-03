@@ -2,8 +2,12 @@
 package main
 
 import (
+	"ConcatFile/loger"
 	"ConcatFile/pkg"
+	"ConcatFile/rgb"
+	"bufio"
 	"flag"
+	"os"
 	"path"
 )
 
@@ -35,4 +39,10 @@ func main() {
 
 	pkg.DrawSep(" FIN ")
 	pkg.DrawEnd()
+
+	rgb.GreenB.Print("Appuyer sur Entrée pour quitter...")
+	_, err := bufio.NewReader(os.Stdin).ReadBytes('\n')
+	if err != nil {
+		loger.Crash("Crash :", err)
+	}
 }
