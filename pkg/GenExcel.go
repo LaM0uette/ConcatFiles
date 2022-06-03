@@ -2,7 +2,6 @@ package pkg
 
 import (
 	"ConcatFile/loger"
-	"FilesDIR/pkg"
 	"fmt"
 	"github.com/tealeg/xlsx"
 	"path"
@@ -22,7 +21,7 @@ func CreateExcelFile() {
 		loger.Crash("Erreur lors de la création de l'onglet Export", err)
 	}
 
-	err = Wb.Save(path.Join(pkg.GetCurrentDir(), fmt.Sprintf("Export_%v.xlsx", time.Now().Format("20060102150405"))))
+	err = Wb.Save(path.Join(GetCurrentDir(), fmt.Sprintf("Export_%v.xlsx", time.Now().Format("20060102150405"))))
 	if err != nil {
 		loger.Crash("Erreur lors de la sauvergarde du fichier Excel", err)
 	}
