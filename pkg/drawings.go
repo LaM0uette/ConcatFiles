@@ -42,3 +42,36 @@ func DrawEnd() {
 	fmt.Print(author+rgb.Green.Sprint(config.Author), "\n", version+rgb.Green.Sprint(config.Version))
 	fmt.Print("\n\n")
 }
+
+func DrawSep(name string) {
+
+	sep := ligneSep + fmt.Sprintf(" %s ", name) + ligneSep
+	sepRgb := rgb.Gray.Sprint(ligneSep) + rgb.GreenB.Sprintf(" %s ", name) + rgb.Gray.Sprint(ligneSep)
+
+	loger.Ui("\n\n", sep)
+	fmt.Println("\n\n", sepRgb)
+}
+
+func DrawParam(v ...any) {
+	defer time.Sleep(400 * time.Millisecond)
+
+	pre := "██████████"
+	txt := ""
+	arg1 := ""
+	arg2 := ""
+
+	if len(v) >= 1 {
+		txt = fmt.Sprintf(" %s", v[0])
+	}
+	if len(v) >= 2 {
+		arg1 = fmt.Sprintf(" %s", v[1])
+	}
+	if len(v) >= 3 {
+		arg2 = fmt.Sprintf(" %s", v[2])
+	}
+
+	loger.Ui(pre, txt, arg1, arg2)
+
+	fmt.Printf("%s%s%s%s\n", rgb.YellowUB.Sprint(pre),
+		rgb.YellowUB.Sprint(txt), rgb.GreenB.Sprint(arg1), rgb.Gray.Sprint(arg2))
+}
