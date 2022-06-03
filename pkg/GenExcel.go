@@ -17,8 +17,13 @@ func CreateExcelFile() {
 
 	Wb = xlsx.NewFile()
 
-	err := Wb.Save(path.Join(pkg.GetCurrentDir(), fmt.Sprintf("Export_%v.xlsx", time.Now().Format("20060102150405"))))
+	_, err := Wb.AddSheet("Export")
 	if err != nil {
-		loger.Crash("Erreur lors de la création du fichier Excel", err)
+		loger.Crash("Erreur lors de la création de l'onglet Export", err)
+	}
+
+	err = Wb.Save(path.Join(pkg.GetCurrentDir(), fmt.Sprintf("Export_%v.xlsx", time.Now().Format("20060102150405"))))
+	if err != nil {
+		loger.Crash("Erreur lors de la sauvergarde du fichier Excel", err)
 	}
 }
