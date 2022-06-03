@@ -8,4 +8,5 @@ func main() {
 
 	pkg.CreateExcelFile()
 
+	pkg.DrawEnd()
 }
