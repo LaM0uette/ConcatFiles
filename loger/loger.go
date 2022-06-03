@@ -1,5 +1,6 @@
 package loger
 
+// TODO: modifier le système de log
 import (
 	"FilesDIR/config"
 	"FilesDIR/rgb"
