@@ -17,7 +17,7 @@ func main() {
 
 	switch *FlgMode {
 	case "jointureGrace":
-
+		pkg.ConcatCSVGrace()
 	}
 
 	pkg.DrawSep(" FIN ")
