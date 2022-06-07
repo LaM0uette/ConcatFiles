@@ -19,7 +19,7 @@ var (
 
 func (d *Data) CreateExcelFile() {
 
-	DrawParam("GENERATION DE LA FICHE D'EXPORT")
+	DrawParam("GENERATION DE LA FICHE D'EXPORT:", "OK")
 
 	Wb = xlsx.NewFile()
 
