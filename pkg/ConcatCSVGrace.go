@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type Position struct {
@@ -114,6 +115,11 @@ func (d *Data) AppendStructData() {
 
 	p := &Position{}
 	p.FillingPosition(TPosition)
+
+	err := Wb.Save(path.Join(d.DstFile, fmt.Sprintf("__Export_%v.xlsx", time.Now().Format("20060102150405"))))
+	if err != nil {
+		loger.Error("Erreur lors de la sauvergarde du fichier Excel", err)
+	}
 }
 
 func ReadCSV(file string) [][]string {
@@ -141,7 +147,11 @@ func ReadCSV(file string) [][]string {
 }
 
 func (p *Position) FillingPosition(file string) {
-
 	CsvData := ReadCSV(file)
-	fmt.Println(CsvData)
+
+	for _, _ = range CsvData {
+		Sht := Wb.Sheet["Export"]
+		Cells, _ := Sht.Cell(1, 1)
+		Cells.Value = "jklfdsf"
+	}
 }
