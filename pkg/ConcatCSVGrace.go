@@ -64,10 +64,10 @@ func (d *Data) ConcatCSVGrace() {
 	d.CountPositions()
 	DrawParam("NOMBRE DE POSTIONS:", strconv.Itoa(d.NbrPos))
 
-	DrawSep("LANCEMENT DE LA COMPILATION")
 	d.AppendDatasInStructs()
 	DrawParam("AJOUT DES DONNÉES DANS LES STRUCTS:", "OK")
 
+	DrawSep("LANCEMENT DE LA COMPILATION")
 	d.RunConcat(path.Join(d.DstFile, NameTPosition))
 
 	err := Wb.Save(path.Join(d.DstFile, fmt.Sprintf("__Export_%v.xlsx", time.Now().Format("20060102150405"))))
