@@ -2,6 +2,7 @@ package pkg
 
 import (
 	"ConcatFiles/loger"
+	"github.com/tealeg/xlsx"
 	"os"
 	"path"
 	"path/filepath"
@@ -15,7 +16,7 @@ func (d *Data) ConcatCSVGrace() {
 	DrawParam("COPIE DES CSV")
 	d.CopyCSV()
 
-	DrawParam("LANCEMENT DE LA COMPILATION")
+	DrawParam("NOMBRE DE POSTIONS: ", d.CountPositions())
 
 	DrawSep("LANCEMENT DE LA COMPILATION")
 }
@@ -47,4 +48,16 @@ func (d *Data) CopyCSV() {
 	CopyFile(path.Join(dlgPath, "t_fibre.csv"), path.Join(d.DstFile, "t_fibre.csv"))
 	CopyFile(path.Join(dlgPath, "t_position.csv"), path.Join(d.DstFile, "t_position.csv"))
 	CopyFile(path.Join(dlgPath, "t_tiroir.csv"), path.Join(d.DstFile, "t_tiroir.csv"))
+}
+
+func (d *Data) CountPositions() int {
+
+	xlsxFile := path.Join(d.DstFile, "t_position.csv")
+	f, err := xlsx.OpenFile(xlsxFile)
+	if err != nil {
+		loger.Error("Error lors de l'ouverture de la t_position:", err)
+	}
+
+	sht := f.Sheets[0]
+	return sht.MaxRow
 }
