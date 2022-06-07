@@ -143,7 +143,6 @@ func (d *Data) AppendDatasInStructs() {
 	AppendEbp(path.Join(d.DstFile, NameTEbp))
 	AppendTirroir(path.Join(d.DstFile, NameTTiroir))
 }
-
 func AppendFibre(file string) {
 	Csv := ReadCSV(file)
 
@@ -156,7 +155,6 @@ func AppendFibre(file string) {
 		TFibre = append(TFibre, Item)
 	}
 }
-
 func AppendCable(file string) {
 	Csv := ReadCSV(file)
 
@@ -209,7 +207,6 @@ func (d *Data) RunConcat(file string) {
 	NbrTot := 0
 
 	for r, val := range CsvData {
-
 		PsCode, _ := Sht.Cell(r, 0)
 		PsNum, _ := Sht.Cell(r, 1)
 		Ps1, _ := Sht.Cell(r, 2)
@@ -226,6 +223,13 @@ func (d *Data) RunConcat(file string) {
 		PsMajSrc, _ := Sht.Cell(r, 22)
 		PsAbdDate, _ := Sht.Cell(r, 23)
 		PsAbdSrc, _ := Sht.Cell(r, 24)
+
+		for _, data := range TFibre {
+			if val[2] == data.FoCode {
+				fmt.Println(data.FoCode, data.FoNumTube)
+				break
+			}
+		}
 
 		PsCode.Value = val[0]
 		PsNum.Value = val[1]
