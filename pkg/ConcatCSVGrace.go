@@ -220,8 +220,8 @@ func (d *Data) RunConcat(file string) {
 	NbrTot := 0
 
 	for r, val := range CsvData {
-		fo1 := getDataFibre(val[2]) //ps1
-		fo2 := getDataFibre(val[3]) //ps2
+		fo1 := getDataFibre(val[2]) //ps1 et cb1
+		fo2 := getDataFibre(val[3]) //ps2 et cb2
 
 		PsCode, _ := Sht.Cell(r, 0)
 		PsNum, _ := Sht.Cell(r, 1)
