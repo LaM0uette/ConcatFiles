@@ -111,19 +111,6 @@ func (d *Data) CountPositions() {
 	d.NbrPos = len(CsvData)
 }
 
-func (d *Data) AppendStructData() {
-
-	TPosition := path.Join(d.DstFile, "t_position.csv")
-
-	p := &Position{}
-	p.FillingPosition(TPosition)
-
-	err := Wb.Save(path.Join(d.DstFile, fmt.Sprintf("__Export_%v.xlsx", time.Now().Format("20060102150405"))))
-	if err != nil {
-		loger.Error("Erreur lors de la sauvergarde du fichier Excel", err)
-	}
-}
-
 func ReadCSV(file string) [][]string {
 
 	CsvFile, err := os.Open(file)
@@ -148,10 +135,23 @@ func ReadCSV(file string) [][]string {
 	return CsvData
 }
 
-func (p *Position) FillingPosition(file string) {
+func (d *Data) AppendStructData() {
+
+	TPosition := path.Join(d.DstFile, "t_position.csv")
+
+	d.WritePosition(TPosition)
+
+	err := Wb.Save(path.Join(d.DstFile, fmt.Sprintf("__Export_%v.xlsx", time.Now().Format("20060102150405"))))
+	if err != nil {
+		loger.Error("Erreur lors de la sauvergarde du fichier Excel", err)
+	}
+}
+
+func (d *Data) WritePosition(file string) {
 	CsvData := ReadCSV(file)
 
 	Sht := Wb.Sheet["Export"]
+	NbrTot := 0
 
 	for r, val := range CsvData {
 
@@ -188,5 +188,10 @@ func (p *Position) FillingPosition(file string) {
 		PsMajSrc.Value = val[13]
 		PsAbdDate.Value = val[14]
 		PsAbdSrc.Value = val[15]
+
+		NbrTot++
+		loger.Void(fmt.Sprintf("%v/%v", NbrTot, d.NbrPos))
 	}
+
+	loger.Ok(fmt.Sprintf("%v positions concaténées", NbrTot))
 }
