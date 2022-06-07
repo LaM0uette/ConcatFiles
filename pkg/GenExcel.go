@@ -8,6 +8,7 @@ import (
 type Data struct {
 	SrcFile string
 	DstFile string
+	NbrPos  int
 }
 
 var (

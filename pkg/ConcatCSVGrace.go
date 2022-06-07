@@ -14,21 +14,22 @@ import (
 )
 
 type Position struct {
-	PsCode     string
-	PsNum      int
-	Ps1        string
-	Ps2        string
-	PsCsCode   string
-	PsTiCode   string
-	PsFunc     string
-	PsState    string
-	PsPreaff   string
-	PsComment  string
-	PsCreaDate string
-	PsMajDate  string
-	PsMajSrc   string
-	PsAbdDate  string
-	PsAbdSrc   string
+	PsCode string
+	PsNum  int
+	Ps1,
+	Ps2,
+	PsCsCode,
+	PsTiCode,
+	PsType,
+	PsFunc,
+	PsState,
+	PsPreaff,
+	PsComment,
+	PsCreaDate,
+	PsMajDate,
+	PsMajSrc,
+	PsAbdDate,
+	PsAbdSrc string
 }
 
 type Fibre struct {
@@ -67,7 +68,8 @@ func (d *Data) ConcatCSVGrace() {
 	d.CopyCSV()
 	DrawParam("COPIE DES CSV:", "OK")
 
-	DrawParam("NOMBRE DE POSTIONS:", strconv.Itoa(d.CountPositions()))
+	d.CountPositions()
+	DrawParam("NOMBRE DE POSTIONS:", strconv.Itoa(d.NbrPos))
 
 	DrawSep("LANCEMENT DE LA COMPILATION")
 	d.AppendStructData()
@@ -102,11 +104,11 @@ func (d *Data) CopyCSV() {
 	CopyFile(path.Join(dlgPath, "t_tiroir.csv"), path.Join(d.DstFile, "t_tiroir.csv"))
 }
 
-func (d *Data) CountPositions() int {
+func (d *Data) CountPositions() {
 
 	tPositionPath := path.Join(d.DstFile, "t_position.csv")
 	CsvData := ReadCSV(tPositionPath)
-	return len(CsvData)
+	d.NbrPos = len(CsvData)
 }
 
 func (d *Data) AppendStructData() {
@@ -149,9 +151,42 @@ func ReadCSV(file string) [][]string {
 func (p *Position) FillingPosition(file string) {
 	CsvData := ReadCSV(file)
 
-	for _, _ = range CsvData {
-		Sht := Wb.Sheet["Export"]
-		Cells, _ := Sht.Cell(1, 1)
-		Cells.Value = "jklfdsf"
+	Sht := Wb.Sheet["Export"]
+
+	for r, val := range CsvData {
+
+		PsCode, _ := Sht.Cell(r, 0)
+		PsNum, _ := Sht.Cell(r, 1)
+		Ps1, _ := Sht.Cell(r, 2)
+		Ps2, _ := Sht.Cell(r, 6)
+		PsCsCode, _ := Sht.Cell(r, 10)
+		PsTiCode, _ := Sht.Cell(r, 13)
+		PsType, _ := Sht.Cell(r, 15)
+		PsFunc, _ := Sht.Cell(r, 16)
+		PsState, _ := Sht.Cell(r, 17)
+		PsPreaff, _ := Sht.Cell(r, 18)
+		PsComment, _ := Sht.Cell(r, 19)
+		PsCreaDate, _ := Sht.Cell(r, 20)
+		PsMajDate, _ := Sht.Cell(r, 21)
+		PsMajSrc, _ := Sht.Cell(r, 22)
+		PsAbdDate, _ := Sht.Cell(r, 23)
+		PsAbdSrc, _ := Sht.Cell(r, 24)
+
+		PsCode.Value = val[0]
+		PsNum.Value = val[1]
+		Ps1.Value = val[2]
+		Ps2.Value = val[3]
+		PsCsCode.Value = val[4]
+		PsTiCode.Value = val[5]
+		PsType.Value = val[6]
+		PsFunc.Value = val[7]
+		PsState.Value = val[8]
+		PsPreaff.Value = val[9]
+		PsComment.Value = val[10]
+		PsCreaDate.Value = val[11]
+		PsMajDate.Value = val[12]
+		PsMajSrc.Value = val[13]
+		PsAbdDate.Value = val[14]
+		PsAbdSrc.Value = val[15]
 	}
 }
