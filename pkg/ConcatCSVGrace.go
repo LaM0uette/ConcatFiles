@@ -13,37 +13,15 @@ import (
 	"time"
 )
 
-type Position struct {
-	PsCode string
-	PsNum  int
-	Ps1,
-	Ps2,
-	PsCsCode,
-	PsTiCode,
-	PsType,
-	PsFunc,
-	PsState,
-	PsPreaff,
-	PsComment,
-	PsCreaDate,
-	PsMajDate,
-	PsMajSrc,
-	PsAbdDate,
-	PsAbdSrc string
-}
-
 type Fibre struct {
-	FoCode     string
-	FoNumTube1 int
-	FoColor1   float32
-	FoNumTube2 int
-	FoColor2   float32
+	FoCode    string
+	FoNumTube string
+	FoColor   string
 }
 
 type Cable struct {
 	CbCode string
-	CbEti1 string
-	CbEti2 string
+	CbEti  string
 }
 
 type Cassette struct {
@@ -61,6 +39,10 @@ type Tirroir struct {
 	TiEti  string
 }
 
+var (
+	TFibre []Fibre
+)
+
 func (d *Data) ConcatCSVGrace() {
 
 	DrawSep("CONCAT CSV GRACE")
@@ -72,7 +54,15 @@ func (d *Data) ConcatCSVGrace() {
 	DrawParam("NOMBRE DE POSTIONS:", strconv.Itoa(d.NbrPos))
 
 	DrawSep("LANCEMENT DE LA COMPILATION")
-	d.AppendStructData()
+	d.AppendDatasInStructs()
+	DrawParam("AJOUT DES DONNÉES DANS LES STRUCTS:", "OK")
+
+	d.RunConcat(path.Join(d.DstFile, "t_position.csv"))
+
+	err := Wb.Save(path.Join(d.DstFile, fmt.Sprintf("__Export_%v.xlsx", time.Now().Format("20060102150405"))))
+	if err != nil {
+		loger.Error("Erreur lors de la sauvergarde du fichier Excel", err)
+	}
 }
 
 func (d *Data) GetFolderDLG() string {
@@ -135,19 +125,24 @@ func ReadCSV(file string) [][]string {
 	return CsvData
 }
 
-func (d *Data) AppendStructData() {
+func (d *Data) AppendDatasInStructs() {
+	AppendFibre(path.Join(d.DstFile, "t_fibre.csv"))
+}
 
-	TPosition := path.Join(d.DstFile, "t_position.csv")
+func AppendFibre(file string) {
+	CsvFibre := ReadCSV(file)
 
-	d.WritePosition(TPosition)
-
-	err := Wb.Save(path.Join(d.DstFile, fmt.Sprintf("__Export_%v.xlsx", time.Now().Format("20060102150405"))))
-	if err != nil {
-		loger.Error("Erreur lors de la sauvergarde du fichier Excel", err)
+	for _, val := range CsvFibre {
+		fItem := Fibre{
+			FoCode:    val[0],
+			FoNumTube: val[4],
+			FoColor:   val[8],
+		}
+		TFibre = append(TFibre, fItem)
 	}
 }
 
-func (d *Data) WritePosition(file string) {
+func (d *Data) RunConcat(file string) {
 	CsvData := ReadCSV(file)
 
 	Sht := Wb.Sheet["Export"]
