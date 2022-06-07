@@ -207,10 +207,17 @@ func (d *Data) RunConcat(file string) {
 	NbrTot := 0
 
 	for r, val := range CsvData {
+		fo1 := getDataFibre(val[2]) //ps1
+		fo2 := getDataFibre(val[3]) //ps2
+
 		PsCode, _ := Sht.Cell(r, 0)
 		PsNum, _ := Sht.Cell(r, 1)
 		Ps1, _ := Sht.Cell(r, 2)
+		FoNumTube1, _ := Sht.Cell(r, 3)
+		FoColor1, _ := Sht.Cell(r, 4)
 		Ps2, _ := Sht.Cell(r, 6)
+		FoNumTube2, _ := Sht.Cell(r, 7)
+		FoColor2, _ := Sht.Cell(r, 8)
 		PsCsCode, _ := Sht.Cell(r, 10)
 		PsTiCode, _ := Sht.Cell(r, 13)
 		PsType, _ := Sht.Cell(r, 15)
@@ -224,17 +231,14 @@ func (d *Data) RunConcat(file string) {
 		PsAbdDate, _ := Sht.Cell(r, 23)
 		PsAbdSrc, _ := Sht.Cell(r, 24)
 
-		for _, data := range TFibre {
-			if val[2] == data.FoCode {
-				fmt.Println(data.FoCode, data.FoNumTube)
-				break
-			}
-		}
-
 		PsCode.Value = val[0]
 		PsNum.Value = val[1]
 		Ps1.Value = val[2]
+		FoNumTube1.Value = fo1[0]
+		FoColor1.Value = fo1[1]
 		Ps2.Value = val[3]
+		FoNumTube2.Value = fo2[0]
+		FoColor2.Value = fo2[1]
 		PsCsCode.Value = val[4]
 		PsTiCode.Value = val[5]
 		PsType.Value = val[6]
@@ -253,4 +257,13 @@ func (d *Data) RunConcat(file string) {
 	}
 
 	loger.Ok(fmt.Sprintf("%v positions concaténées", NbrTot))
+}
+
+func getDataFibre(ps string) []string {
+	for _, data := range TFibre {
+		if ps == data.FoCode {
+			return []string{data.FoNumTube, data.FoColor}
+		}
+	}
+	return []string{"", ""}
 }
