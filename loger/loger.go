@@ -1,9 +1,8 @@
 package loger
 
-// TODO: modifier le système de log
 import (
-	"FilesDIR/config"
-	"FilesDIR/rgb"
+	"ConcatFiles/config"
+	"ConcatFiles/rgb"
 	"fmt"
 	"log"
 	"os"
@@ -98,7 +97,7 @@ func Semicolon(v ...any) {
 // Init func
 func createTempFiles() {
 	folders := []string{
-		"logs", "dumps", "exports", "blacklist", "whitelist",
+		"logs", "dumps",
 	}
 
 	var paths []string
@@ -112,26 +111,5 @@ func createTempFiles() {
 		if err != nil {
 			log.Fatal(err)
 		}
-	}
-
-	createFile(filepath.Join(config.DstPath, "words.txt"))
-	createFile(filepath.Join(filepath.Join(config.DstPath, "blacklist"), "__ALL__.txt"))
-	createFile(filepath.Join(filepath.Join(config.DstPath, "whitelist"), "__ALL__.txt"))
-}
-
-func createFile(file string) {
-	var _, err = os.Stat(file)
-
-	if os.IsNotExist(err) {
-		var file, err = os.Create(file)
-		if err != nil {
-			log.Fatal(err)
-		}
-		defer func(file *os.File) {
-			err := file.Close()
-			if err != nil {
-				log.Fatal(err)
-			}
-		}(file)
 	}
 }

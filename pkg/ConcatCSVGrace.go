@@ -12,8 +12,6 @@ func (d *Data) ConcatCSVGrace() {
 
 	DrawSep("CONCAT CSV GRACE")
 
-	d.GetFolderDLG()
-
 	DrawParam("COPIE DES CSV")
 	dlgPath := path.Join(d.SrcFile, d.GetFolderDLG())
 	CopyFile(path.Join(dlgPath, "t_cable.csv"), path.Join(d.DstFile, "t_cable.csv"))
