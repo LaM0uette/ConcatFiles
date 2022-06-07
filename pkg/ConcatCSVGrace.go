@@ -26,7 +26,7 @@ type Cable struct {
 
 type Cassette struct {
 	CsCode string
-	CbNum  string
+	CsNum  string
 }
 
 type Ebp struct {
@@ -40,7 +40,18 @@ type Tirroir struct {
 }
 
 var (
-	TFibre []Fibre
+	NameTCable    = "t_cable.csv"
+	NameTCassette = "t_cassette.csv"
+	NameTEbp      = "t_ebp.csv"
+	NameTFibre    = "t_fibre.csv"
+	NameTPosition = "t_position.csv"
+	NameTTiroir   = "t_tiroir.csv"
+
+	TFibre    []Fibre
+	TCable    []Cable
+	TCassette []Cassette
+	TEbp      []Ebp
+	TTirroir  []Tirroir
 )
 
 func (d *Data) ConcatCSVGrace() {
@@ -57,7 +68,7 @@ func (d *Data) ConcatCSVGrace() {
 	d.AppendDatasInStructs()
 	DrawParam("AJOUT DES DONNÉES DANS LES STRUCTS:", "OK")
 
-	d.RunConcat(path.Join(d.DstFile, "t_position.csv"))
+	d.RunConcat(path.Join(d.DstFile, NameTPosition))
 
 	err := Wb.Save(path.Join(d.DstFile, fmt.Sprintf("__Export_%v.xlsx", time.Now().Format("20060102150405"))))
 	if err != nil {
@@ -86,17 +97,17 @@ func (d *Data) GetFolderDLG() string {
 func (d *Data) CopyCSV() {
 	dlgPath := path.Join(d.SrcFile, d.GetFolderDLG())
 
-	CopyFile(path.Join(dlgPath, "t_cable.csv"), path.Join(d.DstFile, "t_cable.csv"))
-	CopyFile(path.Join(dlgPath, "t_cassette.csv"), path.Join(d.DstFile, "t_cassette.csv"))
-	CopyFile(path.Join(dlgPath, "t_ebp.csv"), path.Join(d.DstFile, "t_ebp.csv"))
-	CopyFile(path.Join(dlgPath, "t_fibre.csv"), path.Join(d.DstFile, "t_fibre.csv"))
-	CopyFile(path.Join(dlgPath, "t_position.csv"), path.Join(d.DstFile, "t_position.csv"))
-	CopyFile(path.Join(dlgPath, "t_tiroir.csv"), path.Join(d.DstFile, "t_tiroir.csv"))
+	CopyFile(path.Join(dlgPath, NameTCable), path.Join(d.DstFile, NameTCable))
+	CopyFile(path.Join(dlgPath, NameTCassette), path.Join(d.DstFile, NameTCassette))
+	CopyFile(path.Join(dlgPath, NameTEbp), path.Join(d.DstFile, NameTEbp))
+	CopyFile(path.Join(dlgPath, NameTFibre), path.Join(d.DstFile, NameTFibre))
+	CopyFile(path.Join(dlgPath, NameTPosition), path.Join(d.DstFile, NameTPosition))
+	CopyFile(path.Join(dlgPath, NameTTiroir), path.Join(d.DstFile, NameTTiroir))
 }
 
 func (d *Data) CountPositions() {
 
-	tPositionPath := path.Join(d.DstFile, "t_position.csv")
+	tPositionPath := path.Join(d.DstFile, NameTPosition)
 	CsvData := ReadCSV(tPositionPath)
 	d.NbrPos = len(CsvData)
 }
@@ -126,19 +137,68 @@ func ReadCSV(file string) [][]string {
 }
 
 func (d *Data) AppendDatasInStructs() {
-	AppendFibre(path.Join(d.DstFile, "t_fibre.csv"))
+	AppendFibre(path.Join(d.DstFile, NameTFibre))
+	AppendCable(path.Join(d.DstFile, NameTCable))
+	AppendCassette(path.Join(d.DstFile, NameTCassette))
+	AppendEbp(path.Join(d.DstFile, NameTEbp))
+	AppendTirroir(path.Join(d.DstFile, NameTTiroir))
 }
 
 func AppendFibre(file string) {
-	CsvFibre := ReadCSV(file)
+	Csv := ReadCSV(file)
 
-	for _, val := range CsvFibre {
-		fItem := Fibre{
+	for _, val := range Csv {
+		Item := Fibre{
 			FoCode:    val[0],
 			FoNumTube: val[4],
 			FoColor:   val[8],
 		}
-		TFibre = append(TFibre, fItem)
+		TFibre = append(TFibre, Item)
+	}
+}
+
+func AppendCable(file string) {
+	Csv := ReadCSV(file)
+
+	for _, val := range Csv {
+		Item := Cable{
+			CbCode: val[0],
+			CbEti:  val[2],
+		}
+		TCable = append(TCable, Item)
+	}
+}
+func AppendCassette(file string) {
+	Csv := ReadCSV(file)
+
+	for _, val := range Csv {
+		Item := Cassette{
+			CsCode: val[0],
+			CsNum:  val[3],
+		}
+		TCassette = append(TCassette, Item)
+	}
+}
+func AppendEbp(file string) {
+	Csv := ReadCSV(file)
+
+	for _, val := range Csv {
+		Item := Ebp{
+			BpCode: val[0],
+			BpEti:  val[1],
+		}
+		TEbp = append(TEbp, Item)
+	}
+}
+func AppendTirroir(file string) {
+	Csv := ReadCSV(file)
+
+	for _, val := range Csv {
+		Item := Tirroir{
+			TiCode: val[0],
+			TiEti:  val[2],
+		}
+		TTirroir = append(TTirroir, Item)
 	}
 }
 
