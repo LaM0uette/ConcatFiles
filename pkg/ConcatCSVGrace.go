@@ -17,6 +17,7 @@ type Fibre struct {
 	FoCode    string
 	FoNumTube string
 	FoColor   string
+	FoCbCode  string
 }
 
 type Cable struct {
@@ -69,6 +70,7 @@ func (d *Data) ConcatCSVGrace() {
 
 	DrawSep("LANCEMENT DE LA COMPILATION")
 	d.RunConcat(path.Join(d.DstFile, NameTPosition))
+	setHeaderWb()
 
 	err := Wb.Save(path.Join(d.DstFile, fmt.Sprintf("__Export_%v.xlsx", time.Now().Format("20060102150405"))))
 	if err != nil {
@@ -151,6 +153,7 @@ func AppendFibre(file string) {
 			FoCode:    val[0],
 			FoNumTube: val[4],
 			FoColor:   val[8],
+			FoCbCode:  val[2],
 		}
 		TFibre = append(TFibre, Item)
 	}
@@ -200,6 +203,16 @@ func AppendTirroir(file string) {
 	}
 }
 
+func setHeaderWb() {
+	header := []string{"ps_code", "ps_numero", "ps_1", "fo_numtub", "fo_color", "cb_etiquet", "ps_2", "fo_numtub", "fo_color", "cb_etiquet", "ps_cs_code", "cs_num", "bp_etiquet", "ps_ti_code", "ti_etiquet", "ps_type", "ps_fonct", "ps_etat", "ps_preaff", "ps_comment", "ps_creadat", "ps_majdate", "ps_majsrc", "ps_abddate", "ps_abdsrc"}
+
+	Sht := Wb.Sheet["Export"]
+	for i, v := range header {
+		cell, _ := Sht.Cell(0, i)
+		cell.Value = v
+	}
+}
+
 func (d *Data) RunConcat(file string) {
 	CsvData := ReadCSV(file)
 
@@ -215,9 +228,11 @@ func (d *Data) RunConcat(file string) {
 		Ps1, _ := Sht.Cell(r, 2)
 		FoNumTube1, _ := Sht.Cell(r, 3)
 		FoColor1, _ := Sht.Cell(r, 4)
+		CbEti1, _ := Sht.Cell(r, 5)
 		Ps2, _ := Sht.Cell(r, 6)
 		FoNumTube2, _ := Sht.Cell(r, 7)
 		FoColor2, _ := Sht.Cell(r, 8)
+		CbEti2, _ := Sht.Cell(r, 9)
 		PsCsCode, _ := Sht.Cell(r, 10)
 		PsTiCode, _ := Sht.Cell(r, 13)
 		PsType, _ := Sht.Cell(r, 15)
@@ -236,9 +251,11 @@ func (d *Data) RunConcat(file string) {
 		Ps1.Value = val[2]
 		FoNumTube1.Value = fo1[0]
 		FoColor1.Value = fo1[1]
+		CbEti1.Value = fo1[2]
 		Ps2.Value = val[3]
 		FoNumTube2.Value = fo2[0]
 		FoColor2.Value = fo2[1]
+		CbEti2.Value = fo2[2]
 		PsCsCode.Value = val[4]
 		PsTiCode.Value = val[5]
 		PsType.Value = val[6]
@@ -262,8 +279,8 @@ func (d *Data) RunConcat(file string) {
 func getDataFibre(ps string) []string {
 	for _, data := range TFibre {
 		if ps == data.FoCode {
-			return []string{data.FoNumTube, data.FoColor}
+			return []string{data.FoNumTube, data.FoColor, data.FoCbCode}
 		}
 	}
-	return []string{"", ""}
+	return []string{"", "", ""}
 }
