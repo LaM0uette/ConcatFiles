@@ -2,10 +2,12 @@ package pkg
 
 import (
 	"ConcatFiles/loger"
-	"github.com/tealeg/xlsx"
+	"bufio"
+	"encoding/csv"
 	"os"
 	"path"
 	"path/filepath"
+	"strconv"
 	"strings"
 )
 
@@ -13,10 +15,10 @@ func (d *Data) ConcatCSVGrace() {
 
 	DrawSep("CONCAT CSV GRACE")
 
-	DrawParam("COPIE DES CSV")
 	d.CopyCSV()
+	DrawParam("COPIE DES CSV:", "OK")
 
-	DrawParam("NOMBRE DE POSTIONS: ", d.CountPositions())
+	DrawParam("NOMBRE DE POSTIONS:", strconv.Itoa(d.CountPositions()))
 
 	DrawSep("LANCEMENT DE LA COMPILATION")
 }
@@ -52,12 +54,27 @@ func (d *Data) CopyCSV() {
 
 func (d *Data) CountPositions() int {
 
-	xlsxFile := path.Join(d.DstFile, "t_position.csv")
-	f, err := xlsx.OpenFile(xlsxFile)
+	tPositionPath := path.Join(d.DstFile, "t_position.csv")
+
+	tPosition, err := os.Open(tPositionPath)
 	if err != nil {
 		loger.Error("Error lors de l'ouverture de la t_position:", err)
 	}
+	defer func(tPosition *os.File) {
+		err := tPosition.Close()
+		if err != nil {
+			loger.Error("Error lors de la fermeture de la t_position:", err)
+		}
+	}(tPosition)
 
-	sht := f.Sheets[0]
-	return sht.MaxRow
+	reader := csv.NewReader(bufio.NewReader(tPosition))
+	reader.Comma = ';'
+	reader.LazyQuotes = true
+
+	csvLines, err := reader.ReadAll()
+	if err != nil {
+		return 0
+	}
+
+	return len(csvLines)
 }
