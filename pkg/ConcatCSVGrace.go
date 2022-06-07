@@ -13,13 +13,11 @@ func (d *Data) ConcatCSVGrace() {
 	DrawSep("CONCAT CSV GRACE")
 
 	DrawParam("COPIE DES CSV")
-	dlgPath := path.Join(d.SrcFile, d.GetFolderDLG())
-	CopyFile(path.Join(dlgPath, "t_cable.csv"), path.Join(d.DstFile, "t_cable.csv"))
-	CopyFile(path.Join(dlgPath, "t_cassette.csv"), path.Join(d.DstFile, "t_cassette.csv"))
-	CopyFile(path.Join(dlgPath, "t_ebp.csv"), path.Join(d.DstFile, "t_ebp.csv"))
-	CopyFile(path.Join(dlgPath, "t_fibre.csv"), path.Join(d.DstFile, "t_fibre.csv"))
-	CopyFile(path.Join(dlgPath, "t_position.csv"), path.Join(d.DstFile, "t_position.csv"))
-	CopyFile(path.Join(dlgPath, "t_tiroir.csv"), path.Join(d.DstFile, "t_tiroir.csv"))
+	d.CopyCSV()
+
+	DrawParam("LANCEMENT DE LA COMPILATION")
+
+	DrawSep("LANCEMENT DE LA COMPILATION")
 }
 
 func (d *Data) GetFolderDLG() string {
@@ -38,4 +36,15 @@ func (d *Data) GetFolderDLG() string {
 	}
 
 	return dlg
+}
+
+func (d *Data) CopyCSV() {
+	dlgPath := path.Join(d.SrcFile, d.GetFolderDLG())
+
+	CopyFile(path.Join(dlgPath, "t_cable.csv"), path.Join(d.DstFile, "t_cable.csv"))
+	CopyFile(path.Join(dlgPath, "t_cassette.csv"), path.Join(d.DstFile, "t_cassette.csv"))
+	CopyFile(path.Join(dlgPath, "t_ebp.csv"), path.Join(d.DstFile, "t_ebp.csv"))
+	CopyFile(path.Join(dlgPath, "t_fibre.csv"), path.Join(d.DstFile, "t_fibre.csv"))
+	CopyFile(path.Join(dlgPath, "t_position.csv"), path.Join(d.DstFile, "t_position.csv"))
+	CopyFile(path.Join(dlgPath, "t_tiroir.csv"), path.Join(d.DstFile, "t_tiroir.csv"))
 }
