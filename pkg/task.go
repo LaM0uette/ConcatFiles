@@ -2,6 +2,9 @@ package pkg
 
 import (
 	"ConcatFiles/loger"
+	"bufio"
+	"encoding/csv"
+	"fmt"
 	"io/ioutil"
 	"os"
 )
@@ -31,4 +34,28 @@ func CopyFile(srcFile, dstFile string) {
 	if err != nil {
 		loger.Error("Erreur durant la copie du fichier (coller)", err)
 	}
+}
+
+func ReadCSV(file string) [][]string {
+
+	CsvFile, err := os.Open(file)
+	if err != nil {
+		loger.Error(fmt.Sprintf("Error lors de l'ouverture de %s:", file), err)
+	}
+	defer func(tPosition *os.File) {
+		err := tPosition.Close()
+		if err != nil {
+			loger.Error(fmt.Sprintf("Error lors de la fermeture de %s:", file), err)
+		}
+	}(CsvFile)
+
+	reader := csv.NewReader(bufio.NewReader(CsvFile))
+	reader.Comma = ';'
+	reader.LazyQuotes = true
+
+	CsvData, err := reader.ReadAll()
+	if err != nil {
+		loger.Error(fmt.Sprintf("Error lors de la lecture des données de %s:", file), err)
+	}
+	return CsvData
 }

@@ -2,9 +2,8 @@ package pkg
 
 import (
 	"ConcatFiles/loger"
-	"bufio"
-	"encoding/csv"
 	"fmt"
+	"github.com/tealeg/xlsx"
 	"os"
 	"path"
 	"path/filepath"
@@ -60,17 +59,19 @@ func (d *Data) ConcatCSVGrace() {
 
 	DrawSep("CONCAT CSV GRACE")
 
-	d.CopyCSV()
+	d.copyCSV()
 	DrawParam("COPIE DES CSV:", "OK")
 
-	d.CountPositions()
+	d.countPositions()
 	DrawParam("NOMBRE DE POSTIONS:", strconv.Itoa(d.NbrPos))
 
-	d.AppendDatasInStructs()
+	d.checkIfErrExist()
+
+	d.appendDatasInStructs()
 	DrawParam("AJOUT DES DONNÉES DANS LES STRUCTS:", "OK")
 
 	DrawSep("LANCEMENT DE LA COMPILATION")
-	d.RunConcat(path.Join(d.DstFile, NameTPosition))
+	d.runConcat(path.Join(d.DstFile, NameTPosition))
 	setHeaderWb()
 
 	err := Wb.Save(path.Join(d.DstFile, fmt.Sprintf("__Export_%v.xlsx", time.Now().Format("20060102150405"))))
@@ -79,7 +80,7 @@ func (d *Data) ConcatCSVGrace() {
 	}
 }
 
-func (d *Data) GetFolderDLG() string {
+func (d *Data) getFolderDLG() string {
 	var dlg string
 
 	err := filepath.Walk(d.SrcFile, func(path string, fileInfo os.FileInfo, err error) error {
@@ -96,9 +97,26 @@ func (d *Data) GetFolderDLG() string {
 
 	return dlg
 }
+func (d *Data) getDLGErr() string {
+	var dlg string
 
-func (d *Data) CopyCSV() {
-	dlgPath := path.Join(d.SrcFile, d.GetFolderDLG())
+	err := filepath.Walk(d.SrcFile, func(path string, fileInfo os.FileInfo, err error) error {
+		if !fileInfo.IsDir() && strings.Contains(fileInfo.Name(), "-DLG-") && strings.Contains(fileInfo.Name(), "ERREURS-") {
+			dlg = fileInfo.Name()
+			return nil
+		}
+		return nil
+	})
+
+	if err != nil {
+		loger.Error("Error pendant le listing des fichiers", err)
+	}
+
+	return dlg
+}
+
+func (d *Data) copyCSV() {
+	dlgPath := path.Join(d.SrcFile, d.getFolderDLG())
 
 	CopyFile(path.Join(dlgPath, NameTCable), path.Join(d.DstFile, NameTCable))
 	CopyFile(path.Join(dlgPath, NameTCassette), path.Join(d.DstFile, NameTCassette))
@@ -108,45 +126,28 @@ func (d *Data) CopyCSV() {
 	CopyFile(path.Join(dlgPath, NameTTiroir), path.Join(d.DstFile, NameTTiroir))
 }
 
-func (d *Data) CountPositions() {
+func (d *Data) countPositions() {
 
 	tPositionPath := path.Join(d.DstFile, NameTPosition)
 	CsvData := ReadCSV(tPositionPath)
 	d.NbrPos = len(CsvData)
 }
 
-func ReadCSV(file string) [][]string {
-
-	CsvFile, err := os.Open(file)
+func (d *Data) checkIfErrExist() {
+	_, err := xlsx.OpenFile(path.Join(d.SrcFile, d.getDLGErr()))
 	if err != nil {
-		loger.Error(fmt.Sprintf("Error lors de l'ouverture de %s:", file), err)
+		loger.Error("test", err)
 	}
-	defer func(tPosition *os.File) {
-		err := tPosition.Close()
-		if err != nil {
-			loger.Error(fmt.Sprintf("Error lors de la fermeture de %s:", file), err)
-		}
-	}(CsvFile)
-
-	reader := csv.NewReader(bufio.NewReader(CsvFile))
-	reader.Comma = ';'
-	reader.LazyQuotes = true
-
-	CsvData, err := reader.ReadAll()
-	if err != nil {
-		loger.Error(fmt.Sprintf("Error lors de la lecture des données de %s:", file), err)
-	}
-	return CsvData
 }
 
-func (d *Data) AppendDatasInStructs() {
-	AppendFibre(path.Join(d.DstFile, NameTFibre))
-	AppendCable(path.Join(d.DstFile, NameTCable))
-	AppendCassette(path.Join(d.DstFile, NameTCassette))
-	AppendEbp(path.Join(d.DstFile, NameTEbp))
-	AppendTirroir(path.Join(d.DstFile, NameTTiroir))
+func (d *Data) appendDatasInStructs() {
+	appendFibre(path.Join(d.DstFile, NameTFibre))
+	appendCable(path.Join(d.DstFile, NameTCable))
+	appendCassette(path.Join(d.DstFile, NameTCassette))
+	appendEbp(path.Join(d.DstFile, NameTEbp))
+	appendTirroir(path.Join(d.DstFile, NameTTiroir))
 }
-func AppendFibre(file string) {
+func appendFibre(file string) {
 	Csv := ReadCSV(file)
 
 	for _, val := range Csv {
@@ -159,7 +160,7 @@ func AppendFibre(file string) {
 		TFibre = append(TFibre, Item)
 	}
 }
-func AppendCable(file string) {
+func appendCable(file string) {
 	Csv := ReadCSV(file)
 
 	for _, val := range Csv {
@@ -170,7 +171,7 @@ func AppendCable(file string) {
 		TCable = append(TCable, Item)
 	}
 }
-func AppendCassette(file string) {
+func appendCassette(file string) {
 	Csv := ReadCSV(file)
 
 	for _, val := range Csv {
@@ -182,7 +183,7 @@ func AppendCassette(file string) {
 		TCassette = append(TCassette, Item)
 	}
 }
-func AppendEbp(file string) {
+func appendEbp(file string) {
 	Csv := ReadCSV(file)
 
 	for _, val := range Csv {
@@ -193,7 +194,7 @@ func AppendEbp(file string) {
 		TEbp = append(TEbp, Item)
 	}
 }
-func AppendTirroir(file string) {
+func appendTirroir(file string) {
 	Csv := ReadCSV(file)
 
 	for _, val := range Csv {
@@ -205,17 +206,7 @@ func AppendTirroir(file string) {
 	}
 }
 
-func setHeaderWb() {
-	header := []string{"ps_code", "ps_numero", "ps_1", "fo_numtub", "fo_color", "cb_etiquet", "ps_2", "fo_numtub", "fo_color", "cb_etiquet", "ps_cs_code", "cs_num", "bp_etiquet", "ps_ti_code", "ti_etiquet", "ps_type", "ps_fonct", "ps_etat", "ps_preaff", "ps_comment", "ps_creadat", "ps_majdate", "ps_majsrc", "ps_abddate", "ps_abdsrc"}
-
-	Sht := Wb.Sheet["Export"]
-	for i, v := range header {
-		cell, _ := Sht.Cell(0, i)
-		cell.Value = v
-	}
-}
-
-func (d *Data) RunConcat(file string) {
+func (d *Data) runConcat(file string) {
 	CsvData := ReadCSV(file)
 
 	Sht := Wb.Sheet["Export"]
@@ -287,6 +278,16 @@ func (d *Data) RunConcat(file string) {
 	loger.Ok(fmt.Sprintf("%v positions concaténées", NbrTot))
 }
 
+func setHeaderWb() {
+	header := []string{"ps_code", "ps_numero", "ps_1", "fo_numtub", "fo_color", "cb_etiquet", "ps_2", "fo_numtub", "fo_color", "cb_etiquet", "ps_cs_code", "cs_num", "bp_etiquet", "ps_ti_code", "ti_etiquet", "ps_type", "ps_fonct", "ps_etat", "ps_preaff", "ps_comment", "ps_creadat", "ps_majdate", "ps_majsrc", "ps_abddate", "ps_abdsrc"}
+
+	Sht := Wb.Sheet["Export"]
+	for i, v := range header {
+		cell, _ := Sht.Cell(0, i)
+		cell.Value = v
+	}
+}
+
 func getDataFibre(ps string) []string {
 	for _, data := range TFibre {
 		if ps == data.FoCode {
@@ -295,7 +296,6 @@ func getDataFibre(ps string) []string {
 	}
 	return []string{"", "", ""}
 }
-
 func getDataCassette(cs string) []string {
 	for _, data := range TCassette {
 		if cs == data.CsCode {
@@ -304,7 +304,6 @@ func getDataCassette(cs string) []string {
 	}
 	return []string{"", ""}
 }
-
 func getDataEbp(bp string) string {
 	for _, data := range TEbp {
 		if bp == data.BpCode {
@@ -313,7 +312,6 @@ func getDataEbp(bp string) string {
 	}
 	return ""
 }
-
 func getDataTirroir(ti string) string {
 	for _, data := range TTirroir {
 		if ti == data.TiCode {
