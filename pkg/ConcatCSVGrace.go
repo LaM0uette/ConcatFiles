@@ -26,8 +26,9 @@ type Cable struct {
 }
 
 type Cassette struct {
-	CsCode string
-	CsNum  string
+	CsCode   string
+	CsNum    string
+	CsBpCode string
 }
 
 type Ebp struct {
@@ -174,8 +175,9 @@ func AppendCassette(file string) {
 
 	for _, val := range Csv {
 		Item := Cassette{
-			CsCode: val[0],
-			CsNum:  val[3],
+			CsCode:   val[0],
+			CsNum:    val[3],
+			CsBpCode: val[2],
 		}
 		TCassette = append(TCassette, Item)
 	}
@@ -223,6 +225,7 @@ func (d *Data) RunConcat(file string) {
 		fo1 := getDataFibre(val[2])   //ps1 et cb1
 		fo2 := getDataFibre(val[3])   //ps2 et cb2
 		cs := getDataCassette(val[4]) //psCsCode
+		bp := getDataEbp(cs[1])       //csCode
 
 		PsCode, _ := Sht.Cell(r, 0)
 		PsNum, _ := Sht.Cell(r, 1)
@@ -236,6 +239,7 @@ func (d *Data) RunConcat(file string) {
 		CbEti2, _ := Sht.Cell(r, 9)
 		PsCsCode, _ := Sht.Cell(r, 10)
 		CsNum, _ := Sht.Cell(r, 11)
+		BpEti, _ := Sht.Cell(r, 12)
 		PsTiCode, _ := Sht.Cell(r, 13)
 		PsType, _ := Sht.Cell(r, 15)
 		PsFunc, _ := Sht.Cell(r, 16)
@@ -259,7 +263,8 @@ func (d *Data) RunConcat(file string) {
 		FoColor2.Value = fo2[1]
 		CbEti2.Value = fo2[2]
 		PsCsCode.Value = val[4]
-		CsNum.Value = cs
+		CsNum.Value = cs[0]
+		BpEti.Value = bp
 		PsTiCode.Value = val[5]
 		PsType.Value = val[6]
 		PsFunc.Value = val[7]
@@ -288,10 +293,19 @@ func getDataFibre(ps string) []string {
 	return []string{"", "", ""}
 }
 
-func getDataCassette(cs string) string {
+func getDataCassette(cs string) []string {
 	for _, data := range TCassette {
 		if cs == data.CsCode {
-			return data.CsNum
+			return []string{data.CsNum, data.CsBpCode}
+		}
+	}
+	return []string{"", ""}
+}
+
+func getDataEbp(bp string) string {
+	for _, data := range TEbp {
+		if bp == data.BpCode {
+			return data.BpEti
 		}
 	}
 	return ""
