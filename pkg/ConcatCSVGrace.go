@@ -297,6 +297,14 @@ func (d *Data) runConcat(file string) {
 		PsAbdDate.Value = val[14]
 		PsAbdSrc.Value = val[15]
 
+		if len(TPositionErr) > 0 {
+			if checkPosErr(val[0]) {
+				style := xlsx.NewStyle()
+				style.Fill.BgColor = "FFFFC000"
+				PsCode.SetStyle(style)
+			}
+		}
+
 		NbrTot++
 		loger.Void(fmt.Sprintf("%v/%v", NbrTot, d.NbrPos))
 	}
@@ -312,6 +320,15 @@ func setHeaderWb() {
 		cell, _ := Sht.Cell(0, i)
 		cell.Value = v
 	}
+}
+
+func checkPosErr(ps string) bool {
+	for _, data := range TPositionErr {
+		if ps == data.PsCode {
+			return true
+		}
+	}
+	return false
 }
 
 func getDataFibre(ps string) []string {
