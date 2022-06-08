@@ -72,7 +72,7 @@ func (d *Data) ConcatCSVGrace() {
 
 	DrawSep("COMPILATION")
 	d.runConcat(path.Join(d.DstFile, NameTPosition))
-	setHeaderWb()
+	setFormatingWb()
 
 	err := Wb.Save(path.Join(d.DstFile, fmt.Sprintf("__Export_%v.xlsx", time.Now().Format("20060102150405"))))
 	if err != nil {
@@ -312,7 +312,7 @@ func (d *Data) runConcat(file string) {
 	loger.Ok(fmt.Sprintf("%v positions concaténées", NbrTot))
 }
 
-func setHeaderWb() {
+func setFormatingWb() {
 	header := []string{"ps_code", "ps_numero", "ps_1", "fo_numtub", "fo_color", "cb_etiquet", "ps_2", "fo_numtub", "fo_color", "cb_etiquet", "ps_cs_code", "cs_num", "bp_etiquet", "ps_ti_code", "ti_etiquet", "ps_type", "ps_fonct", "ps_etat", "ps_preaff", "ps_comment", "ps_creadat", "ps_majdate", "ps_majsrc", "ps_abddate", "ps_abdsrc"}
 
 	Sht := Wb.Sheet["Export"]
@@ -320,6 +320,13 @@ func setHeaderWb() {
 		cell, _ := Sht.Cell(0, i)
 		cell.Value = v
 	}
+
+	Sht.SetColWidth(1, 25, 18)
+	Sht.SetColWidth(2, 2, 10)
+	Sht.SetColWidth(4, 5, 10)
+	Sht.SetColWidth(8, 9, 10)
+	Sht.SetColWidth(12, 12, 10)
+	Sht.SetColWidth(16, 18, 8)
 }
 
 func checkPosErr(ps string) bool {
