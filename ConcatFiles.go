@@ -19,8 +19,7 @@ func main() {
 	pkg.DrawStart()
 	pkg.DrawSep("BUILD")
 
-	pt := "C:\\Users\\XD5965\\OneDrive - EQUANS\\Bureau\\DLG"
-	//pt := SrcFile: pkg.GetCurrentDir(),
+	pt := pkg.GetCurrentDir()
 
 	d := pkg.Data{
 		SrcFile: pt,
