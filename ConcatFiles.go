@@ -7,8 +7,10 @@ import (
 	"ConcatFiles/rgb"
 	"bufio"
 	"flag"
+	"fmt"
 	"os"
 	"path"
+	"time"
 )
 
 func main() {
@@ -24,12 +26,13 @@ func main() {
 	pkg.DrawStart(txtMode)
 	pkg.DrawSep("BUILD")
 
-	//pt := "T:\\RIP FTTH\\RIP FTTH 47\\2_Dossiers\\3_FTTH\\NRO_19\\5_ZAPM\\2_Plans\\3_DOE\\NRO_19_PM_06\\REC-DPR-47-NERA-NER6-01-V3"
-	pt := pkg.GetCurrentDir()
+	pt := "C:\\Users\\XD5965\\OneDrive - EQUANS\\Bureau\\REC-DPR-47-NERA-NER6-01-V3"
+	//pt := pkg.GetCurrentDir()
 
 	d := pkg.Data{
 		SrcFile: pt,
 		DstFile: path.Join(pt, "__Concat__"),
+		XlFile:  path.Join(pt, "__Concat__", fmt.Sprintf("__Export_%v.xlsm", time.Now().Format("20060102150405"))),
 	}
 
 	pkg.DrawParam("CREATION DU DOSSIER:", "OK")

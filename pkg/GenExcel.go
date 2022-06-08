@@ -8,6 +8,7 @@ import (
 type Data struct {
 	SrcFile string
 	DstFile string
+	XlFile  string
 	NbrPos  int
 }
 
@@ -19,9 +20,14 @@ func (d *Data) CreateExcelFile() {
 
 	DrawParam("GENERATION DE LA FICHE D'EXPORT:", "OK")
 
-	Wb = xlsx.NewFile()
+	CopyFile("T:\\- 4 Suivi Appuis\\26_MACROS\\GO\\ConcatFiles\\Docs\\MacroJointureGrace.xlsm", d.XlFile)
 
-	_, err := Wb.AddSheet("Export")
+	Wb, err := xlsx.OpenFile(d.XlFile)
+	if err != nil {
+		loger.Error("Erreur lors de l'ouverture de la fiche MacroJointureGrace", err)
+	}
+
+	_, err = Wb.AddSheet("Export")
 	if err != nil {
 		loger.Error("Erreur lors de la création de l'onglet Export", err)
 	}

@@ -9,7 +9,6 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
-	"time"
 )
 
 type Fibre struct {
@@ -74,7 +73,7 @@ func (d *Data) ConcatCSVGrace() {
 	d.runConcat(path.Join(d.DstFile, NameTPosition))
 	setFormatingWb()
 
-	err := Wb.Save(path.Join(d.DstFile, fmt.Sprintf("__Export_%v.xlsx", time.Now().Format("20060102150405"))))
+	err := Wb.Save(d.XlFile)
 	if err != nil {
 		loger.Error("Erreur lors de la sauvergarde du fichier Excel", err)
 	}
