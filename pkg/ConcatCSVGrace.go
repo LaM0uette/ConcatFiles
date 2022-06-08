@@ -18,26 +18,25 @@ type Fibre struct {
 	FoColor   string
 	FoCbCode  string
 }
-
 type Cable struct {
 	CbCode string
 	CbEti  string
 }
-
 type Cassette struct {
 	CsCode   string
 	CsNum    string
 	CsBpCode string
 }
-
 type Ebp struct {
 	BpCode string
 	BpEti  string
 }
-
 type Tirroir struct {
 	TiCode string
 	TiEti  string
+}
+type PositionErr struct {
+	PsCode string
 }
 
 var (
@@ -48,11 +47,12 @@ var (
 	NameTPosition = "t_position.csv"
 	NameTTiroir   = "t_tiroir.csv"
 
-	TFibre    []Fibre
-	TCable    []Cable
-	TCassette []Cassette
-	TEbp      []Ebp
-	TTirroir  []Tirroir
+	TFibre       []Fibre
+	TCable       []Cable
+	TCassette    []Cassette
+	TEbp         []Ebp
+	TTirroir     []Tirroir
+	TPositionErr []PositionErr
 )
 
 func (d *Data) ConcatCSVGrace() {
@@ -70,7 +70,7 @@ func (d *Data) ConcatCSVGrace() {
 	d.appendDatasInStructs()
 	DrawParam("AJOUT DES DONNÉES DANS LES STRUCTS:", "OK")
 
-	DrawSep("LANCEMENT DE LA COMPILATION")
+	DrawSep("COMPILATION")
 	d.runConcat(path.Join(d.DstFile, NameTPosition))
 	setHeaderWb()
 
@@ -135,6 +135,7 @@ func (d *Data) countPositions() {
 
 func (d *Data) checkIfErrExist() {
 	f := path.Join(d.SrcFile, d.getDLGErr())
+
 	if !FileExist(f) {
 		return
 	}
@@ -142,6 +143,7 @@ func (d *Data) checkIfErrExist() {
 	WbErr, err := xlsx.OpenFile(f)
 	if err != nil {
 		loger.Error("Erreur à l'ouverture du fichier", err)
+		return
 	}
 
 	for _, sheet := range WbErr.Sheets {
@@ -151,6 +153,8 @@ func (d *Data) checkIfErrExist() {
 			for i := 0; i < sheet.MaxRow; i++ {
 				cell, _ := sheet.Cell(i, 1)
 				if strings.Contains(cell.Value, "PS") {
+					p := PositionErr{PsCode: cell.Value}
+					TPositionErr = append(TPositionErr, p)
 					counter++
 				}
 			}
