@@ -220,8 +220,9 @@ func (d *Data) RunConcat(file string) {
 	NbrTot := 0
 
 	for r, val := range CsvData {
-		fo1 := getDataFibre(val[2]) //ps1 et cb1
-		fo2 := getDataFibre(val[3]) //ps2 et cb2
+		fo1 := getDataFibre(val[2])   //ps1 et cb1
+		fo2 := getDataFibre(val[3])   //ps2 et cb2
+		cs := getDataCassette(val[4]) //psCsCode
 
 		PsCode, _ := Sht.Cell(r, 0)
 		PsNum, _ := Sht.Cell(r, 1)
@@ -234,6 +235,7 @@ func (d *Data) RunConcat(file string) {
 		FoColor2, _ := Sht.Cell(r, 8)
 		CbEti2, _ := Sht.Cell(r, 9)
 		PsCsCode, _ := Sht.Cell(r, 10)
+		CsNum, _ := Sht.Cell(r, 11)
 		PsTiCode, _ := Sht.Cell(r, 13)
 		PsType, _ := Sht.Cell(r, 15)
 		PsFunc, _ := Sht.Cell(r, 16)
@@ -257,6 +259,7 @@ func (d *Data) RunConcat(file string) {
 		FoColor2.Value = fo2[1]
 		CbEti2.Value = fo2[2]
 		PsCsCode.Value = val[4]
+		CsNum.Value = cs
 		PsTiCode.Value = val[5]
 		PsType.Value = val[6]
 		PsFunc.Value = val[7]
@@ -283,4 +286,13 @@ func getDataFibre(ps string) []string {
 		}
 	}
 	return []string{"", "", ""}
+}
+
+func getDataCassette(cs string) string {
+	for _, data := range TCassette {
+		if cs == data.CsCode {
+			return data.CsNum
+		}
+	}
+	return ""
 }
