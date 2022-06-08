@@ -24,7 +24,7 @@ func main() {
 	pkg.DrawStart(txtMode)
 	pkg.DrawSep("BUILD")
 
-	//pt := "C:\\Users\\XD5965\\OneDrive - EQUANS\\Bureau\\DLG"
+	//pt := "T:\\RIP FTTH\\RIP FTTH 47\\2_Dossiers\\3_FTTH\\NRO_19\\5_ZAPM\\2_Plans\\3_DOE\\NRO_19_PM_06\\REC-DPR-47-NERA-NER6-01-V3"
 	pt := pkg.GetCurrentDir()
 
 	d := pkg.Data{

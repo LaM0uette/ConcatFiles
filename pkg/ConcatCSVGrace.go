@@ -84,7 +84,7 @@ func (d *Data) getFolderDLG() string {
 	var dlg string
 
 	err := filepath.Walk(d.SrcFile, func(path string, fileInfo os.FileInfo, err error) error {
-		if fileInfo.IsDir() && strings.Contains(fileInfo.Name(), "-DLG-") {
+		if fileInfo.IsDir() && strings.Contains(fileInfo.Name(), "-DLG-") && !strings.Contains(fileInfo.Name(), "_") {
 			dlg = fileInfo.Name()
 			return nil
 		}
