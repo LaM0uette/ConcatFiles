@@ -31,6 +31,7 @@ func DrawStart(txt any) {
 	loger.Ui("\n")
 
 	rgb.Green.Println(start)
+	fmt.Print("\t\t", rgb.Green.Sprint(txt), "\n")
 	fmt.Print("\t\t", author+rgb.Green.Sprint(config.Author), "\n", "\t\t", version+rgb.Green.Sprint(config.Version))
 	fmt.Print("\n\n")
 }
