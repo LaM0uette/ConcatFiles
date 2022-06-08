@@ -334,7 +334,16 @@ func checkPosErr(ps string) bool {
 func getDataFibre(ps string) []string {
 	for _, data := range TFibre {
 		if ps == data.FoCode {
-			return []string{data.FoNumTube, data.FoColor, data.FoCbCode}
+
+			var cb string
+			for _, cbs := range TCable {
+				if cbs.CbCode == data.FoCbCode {
+					cb = cbs.CbEti
+					break
+				}
+			}
+
+			return []string{data.FoNumTube, data.FoColor, cb}
 		}
 	}
 	return []string{"", "", ""}
