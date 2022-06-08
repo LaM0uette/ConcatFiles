@@ -134,10 +134,27 @@ func (d *Data) countPositions() {
 }
 
 func (d *Data) checkIfErrExist() {
-	_, err := xlsx.OpenFile(path.Join(d.SrcFile, d.getDLGErr()))
+	WbErr, err := xlsx.OpenFile(path.Join(d.SrcFile, d.getDLGErr()))
 	if err != nil {
-		loger.Error("test", err)
+		return
 	}
+
+	for _, sheet := range WbErr.Sheets {
+		if sheet.Name == "POSITION" {
+			counter := 0
+
+			for i := 0; i < sheet.MaxRow; i++ {
+				cell, _ := sheet.Cell(i, 1)
+				if strings.Contains(cell.Value, "PS") {
+					counter++
+				}
+			}
+
+			DrawParam("NOMBRES DE POSITIONS EN ERREURS:", counter)
+			break
+		}
+	}
+
 }
 
 func (d *Data) appendDatasInStructs() {
