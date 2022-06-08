@@ -226,6 +226,7 @@ func (d *Data) RunConcat(file string) {
 		fo2 := getDataFibre(val[3])   //ps2 et cb2
 		cs := getDataCassette(val[4]) //psCsCode
 		bp := getDataEbp(cs[1])       //csCode
+		ti := getDataTirroir(val[5])  //tiCode
 
 		PsCode, _ := Sht.Cell(r, 0)
 		PsNum, _ := Sht.Cell(r, 1)
@@ -241,6 +242,7 @@ func (d *Data) RunConcat(file string) {
 		CsNum, _ := Sht.Cell(r, 11)
 		BpEti, _ := Sht.Cell(r, 12)
 		PsTiCode, _ := Sht.Cell(r, 13)
+		TiEti, _ := Sht.Cell(r, 14)
 		PsType, _ := Sht.Cell(r, 15)
 		PsFunc, _ := Sht.Cell(r, 16)
 		PsState, _ := Sht.Cell(r, 17)
@@ -266,6 +268,7 @@ func (d *Data) RunConcat(file string) {
 		CsNum.Value = cs[0]
 		BpEti.Value = bp
 		PsTiCode.Value = val[5]
+		TiEti.Value = ti
 		PsType.Value = val[6]
 		PsFunc.Value = val[7]
 		PsState.Value = val[8]
@@ -306,6 +309,15 @@ func getDataEbp(bp string) string {
 	for _, data := range TEbp {
 		if bp == data.BpCode {
 			return data.BpEti
+		}
+	}
+	return ""
+}
+
+func getDataTirroir(ti string) string {
+	for _, data := range TTirroir {
+		if ti == data.TiCode {
+			return data.TiEti
 		}
 	}
 	return ""
