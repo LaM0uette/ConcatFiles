@@ -22,10 +22,11 @@ const (
 	version = `Version: `
 )
 
-func DrawStart() {
+func DrawStart(txt any) {
 	defer time.Sleep(1 * time.Second)
 
 	loger.Ui(start)
+	loger.Ui("\t\t", txt, "\n")
 	loger.Ui("\t\t", author+config.Author, "\n", "\t\t", version+config.Version)
 	loger.Ui("\n")
 

@@ -12,11 +12,16 @@ import (
 )
 
 func main() {
-
 	FlgMode := flag.String("m", "jointureGrace", "Mode de compilation")
 	flag.Parse()
 
-	pkg.DrawStart()
+	txtMode := ""
+	switch *FlgMode {
+	case "jointureGrace":
+		txtMode = "Jointure Grace"
+	}
+
+	pkg.DrawStart(txtMode)
 	pkg.DrawSep("BUILD")
 
 	//pt := "C:\\Users\\XD5965\\OneDrive - EQUANS\\Bureau\\DLG"
