@@ -134,9 +134,14 @@ func (d *Data) countPositions() {
 }
 
 func (d *Data) checkIfErrExist() {
-	WbErr, err := xlsx.OpenFile(path.Join(d.SrcFile, d.getDLGErr()))
-	if err != nil {
+	f := path.Join(d.SrcFile, d.getDLGErr())
+	if !FileExist(f) {
 		return
+	}
+
+	WbErr, err := xlsx.OpenFile(f)
+	if err != nil {
+		loger.Error("Erreur à l'ouverture du fichier", err)
 	}
 
 	for _, sheet := range WbErr.Sheets {
@@ -150,7 +155,7 @@ func (d *Data) checkIfErrExist() {
 				}
 			}
 
-			DrawParam("NOMBRES DE POSITIONS EN ERREURS:", counter)
+			DrawParam("NOMBRES DE POSITIONS EN ERREURS:", strconv.Itoa(counter))
 			break
 		}
 	}

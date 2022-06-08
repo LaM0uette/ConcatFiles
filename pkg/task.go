@@ -18,6 +18,15 @@ func GetCurrentDir() string {
 	return pwd
 }
 
+func FileExist(file string) bool {
+
+	if _, err := os.Stat(file); err == nil {
+		return true
+	} else {
+		return false
+	}
+}
+
 func CreateNewFolder(path string) {
 	if err := os.MkdirAll(path, os.ModePerm); err != nil {
 		loger.Error("Erreur durant la création du dossier", err)
