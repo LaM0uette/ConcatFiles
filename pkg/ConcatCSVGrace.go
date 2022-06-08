@@ -300,7 +300,7 @@ func (d *Data) runConcat(file string) {
 		if len(TPositionErr) > 0 {
 			if checkPosErr(val[0]) {
 				style := xlsx.NewStyle()
-				style.Fill.BgColor = "FFFFC000"
+				style.Font.Color = "FFC000"
 				PsCode.SetStyle(style)
 			}
 		}
