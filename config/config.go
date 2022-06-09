@@ -9,7 +9,7 @@ import (
 const (
 	Name    = "ConcatFiles"
 	Author  = "LaM0uette"
-	Version = "0.2"
+	Version = "1.0.0"
 )
 
 var (
