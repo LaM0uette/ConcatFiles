@@ -26,13 +26,15 @@ func main() {
 	pkg.DrawStart(txtMode)
 	pkg.DrawSep("BUILD")
 
-	pt := "C:\\Users\\XD5965\\OneDrive - EQUANS\\Bureau\\REC-DPR-47-NERA-NER6-01-V3"
-	//pt := pkg.GetCurrentDir()
+	srcFile := "C:\\Users\\XD5965\\OneDrive - EQUANS\\Bureau\\REC-DPR-47-NERA-NER6-01-V3"
+	//srcFile := pkg.GetCurrentDir()
+	dstFile := path.Join(srcFile, "__Concat__")
+	xlFile := path.Join(dstFile, fmt.Sprintf("__Export_%v.xlsx", time.Now().Format("20060102150405")))
 
 	d := pkg.Data{
-		SrcFile: pt,
-		DstFile: path.Join(pt, "__Concat__"),
-		XlFile:  path.Join(pt, "__Concat__", fmt.Sprintf("__Export_%v.xlsm", time.Now().Format("20060102150405"))),
+		SrcFile: srcFile,
+		DstFile: dstFile,
+		XlFile:  xlFile,
 	}
 
 	pkg.DrawParam("CREATION DU DOSSIER:", "OK")

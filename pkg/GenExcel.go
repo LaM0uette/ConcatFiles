@@ -20,14 +20,9 @@ func (d *Data) CreateExcelFile() {
 
 	DrawParam("GENERATION DE LA FICHE D'EXPORT:", "OK")
 
-	CopyFile("T:\\- 4 Suivi Appuis\\26_MACROS\\GO\\ConcatFiles\\Docs\\MacroJointureGrace.xlsm", d.XlFile)
+	Wb = xlsx.NewFile()
 
-	Wb, err := xlsx.OpenFile(d.XlFile)
-	if err != nil {
-		loger.Error("Erreur lors de l'ouverture de la fiche MacroJointureGrace", err)
-	}
-
-	_, err = Wb.AddSheet("Export")
+	_, err := Wb.AddSheet("Export")
 	if err != nil {
 		loger.Error("Erreur lors de la création de l'onglet Export", err)
 	}
