@@ -190,9 +190,11 @@ func (d *Data) runConcat(file string) {
 
 		if len(TPositionErr) > 0 {
 			if checkPosErr(val[0]) {
-				style := xlsx.NewStyle()
-				style.Font.Color = "FFC000"
-				//PsCode.SetStyle(style)
+				//style := xlsx.NewStyle()
+				//style.Font.Color = "FFC000"
+
+				style, _ := Wba.NewStyle(fmt.Sprintf("{\"fill\":{\"type\":\"pattern\",\"color\":[\"#%s\"],\"pattern\":1}}", "FFC000"))
+				_ = Wba.SetCellStyle(Sht, fmt.Sprintf("A%v", r), fmt.Sprintf("A%v", r), style)
 			}
 		}
 
