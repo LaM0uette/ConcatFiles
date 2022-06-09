@@ -46,8 +46,6 @@ func main() {
 		d.ConcatCSVGrace()
 	}
 
-	//d.CreateExcelFile()
-
 	pkg.DrawSep(" FIN ")
 	pkg.DrawEnd()
 

@@ -59,14 +59,9 @@ var (
 )
 
 func (d *Data) ConcatCSVGrace() {
-	//Wba, err := excelize.OpenFile(d.XlFile)
-	//if err != nil {
-	//	loger.Error("Erreur lors de l'ouverture de la fiche excel", err)
-	//}
+	DrawSep("CONCAT CSV GRACE")
 
 	Wba, _ = excelize.OpenFile(d.XlFile)
-
-	DrawSep("CONCAT CSV GRACE")
 
 	d.copyCSV()
 	DrawParam("COPIE DES CSV:", "OK")
@@ -125,6 +120,12 @@ func (d *Data) countPositions() {
 }
 
 func (d *Data) checkIfErrExist() {
+	dlg := d.getDLGErr()
+
+	if len(dlg) <= 0 {
+		return
+	}
+
 	f := path.Join(d.SrcFile, d.getDLGErr())
 
 	if !FileExist(f) {
@@ -428,7 +429,7 @@ func (d *Data) getDLGErr() string {
 	var dlg string
 
 	err := filepath.Walk(d.SrcFile, func(path string, fileInfo os.FileInfo, err error) error {
-		if !fileInfo.IsDir() && strings.Contains(fileInfo.Name(), "-DLG-") && strings.Contains(fileInfo.Name(), "ERREURS-") {
+		if !fileInfo.IsDir() && strings.Contains(fileInfo.Name(), "-DLG-") && strings.Contains(fileInfo.Name(), "ERREURS-") && strings.Contains(fileInfo.Name(), ".xlsx") {
 			dlg = fileInfo.Name()
 			return nil
 		}
