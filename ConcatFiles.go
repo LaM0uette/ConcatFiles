@@ -40,12 +40,13 @@ func main() {
 	pkg.DrawParam("CREATION DU DOSSIER:", "OK")
 	pkg.CreateNewFolder(d.DstFile)
 
-	d.CreateExcelFile()
-
 	switch *FlgMode {
 	case "jointureGrace":
+		d.CopyExcelFile("T:\\- 4 Suivi Appuis\\26_MACROS\\GO\\ConcatFiles\\Docs\\MacroJointureGrace.xlsm")
 		d.ConcatCSVGrace()
 	}
+
+	//d.CreateExcelFile()
 
 	pkg.DrawSep(" FIN ")
 	pkg.DrawEnd()
