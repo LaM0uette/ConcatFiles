@@ -64,7 +64,7 @@ func (d *Data) ConcatCSVGrace() {
 	//	loger.Error("Erreur lors de l'ouverture de la fiche excel", err)
 	//}
 
-	Wba = excelize.NewFile()
+	Wba, _ = excelize.OpenFile(d.XlFile)
 
 	DrawSep("CONCAT CSV GRACE")
 
@@ -83,10 +83,10 @@ func (d *Data) ConcatCSVGrace() {
 	d.runConcat(path.Join(d.DstFile, NameTPosition))
 	setFormatingWb()
 
-	err := Wba.AddVBAProject("T:\\- 4 Suivi Appuis\\26_MACROS\\GO\\ConcatFiles\\Docs\\MJG.bin")
-	if err != nil {
-		loger.Error("Erreur pendant l'ajout du module VBA'", err)
-	}
+	//err := Wba.AddVBAProject("T:\\- 4 Suivi Appuis\\26_MACROS\\GO\\ConcatFiles\\Docs\\MJG.bin")
+	//if err != nil {
+	//	loger.Error("Erreur pendant l'ajout du module VBA'", err)
+	//}
 
 	if err := Wba.SaveAs(d.XlFile); err != nil {
 		loger.Error("Erreur pendant la sauvegarde du fichier Excel:", err)

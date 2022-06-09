@@ -42,6 +42,7 @@ func main() {
 
 	switch *FlgMode {
 	case "jointureGrace":
+		d.CopyExcelFile("T:\\- 4 Suivi Appuis\\26_MACROS\\GO\\ConcatFiles\\Docs\\MJG.xlsm")
 		d.ConcatCSVGrace()
 	}
 
