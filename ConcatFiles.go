@@ -29,7 +29,7 @@ func main() {
 	srcFile := "C:\\Users\\XD5965\\OneDrive - EQUANS\\Bureau\\REC-DPR-47-NERA-NER6-01-V3"
 	//srcFile := pkg.GetCurrentDir()
 	dstFile := path.Join(srcFile, "__Concat__")
-	xlFile := path.Join(dstFile, fmt.Sprintf("__Export_%v.xlsx", time.Now().Format("20060102150405")))
+	xlFile := path.Join(dstFile, fmt.Sprintf("__Export_%v.xlsm", time.Now().Format("20060102150405")))
 
 	d := pkg.Data{
 		SrcFile: srcFile,
@@ -42,7 +42,6 @@ func main() {
 
 	switch *FlgMode {
 	case "jointureGrace":
-		d.CopyExcelFile("T:\\- 4 Suivi Appuis\\26_MACROS\\GO\\ConcatFiles\\Docs\\MacroJointureGrace.xlsm")
 		d.ConcatCSVGrace()
 	}
 
