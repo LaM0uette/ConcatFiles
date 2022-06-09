@@ -100,6 +100,8 @@ func (d *Data) ConcatCSVGrace() {
 		AppVersion:        "16.0000",
 	})
 
+	Wba.SetActiveSheet(1)
+
 	if err := Wba.SaveAs(d.XlFile); err != nil {
 		loger.Error("Erreur pendant la sauvegarde du fichier Excel:", err)
 	}
