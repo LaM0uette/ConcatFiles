@@ -88,6 +88,18 @@ func (d *Data) ConcatCSVGrace() {
 	//	loger.Error("Erreur pendant l'ajout du module VBA'", err)
 	//}
 
+	_ = Wba.SetCellValue("MACRO", "A3", d.DstFile)
+
+	_ = Wba.SetAppProps(&excelize.AppProperties{
+		Application:       "Microsoft Excel",
+		ScaleCrop:         true,
+		DocSecurity:       2,
+		Company:           "LaM0uette",
+		LinksUpToDate:     true,
+		HyperlinksChanged: true,
+		AppVersion:        "16.0000",
+	})
+
 	if err := Wba.SaveAs(d.XlFile); err != nil {
 		loger.Error("Erreur pendant la sauvegarde du fichier Excel:", err)
 	}
