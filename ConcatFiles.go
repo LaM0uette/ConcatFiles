@@ -51,7 +51,7 @@ func main() {
 		d.ConcatCSVGrace()
 	case "jointureEbp":
 		d.CopyExcelFile(path.Join(config.PathXlsm, "MJEbp.xlsm"))
-		d.ConcatCSVGrace()
+		d.ConcatCSVEbp()
 	}
 
 	pkg.DrawSep(" FIN ")

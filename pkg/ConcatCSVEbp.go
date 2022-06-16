@@ -8,20 +8,20 @@ import (
 	"strconv"
 )
 
-func (d *Data) ConcatCSVGrace() {
-	DrawSep("CONCAT CSV GRACE")
+func (d *Data) ConcatCSVEbp() {
+	DrawSep("CONCAT CSV EBP")
 
 	Wba, _ = excelize.OpenFile(d.XlFile)
 
-	d.copyCSVGrace()
+	d.copyCSVEbp()
 	DrawParam("COPIE DES CSV:", "OK")
 
-	d.countPositions()
-	DrawParam("NOMBRE DE POSTIONS:", strconv.Itoa(d.NbrItems))
+	d.countEbp()
+	DrawParam("NOMBRE D'EBP:", strconv.Itoa(d.NbrItems))
 
-	d.checkIfErrExist()
+	//d.checkIfErrExist()
 
-	d.appendDatasInStructs()
+	d.appendEbpDatasInStructs()
 	DrawParam("AJOUT DES DONNÉES DANS LES STRUCTS:", "OK")
 
 	DrawSep("COMPILATION")
@@ -34,29 +34,23 @@ func (d *Data) ConcatCSVGrace() {
 
 //...
 // Functions
-func (d *Data) copyCSVGrace() {
+func (d *Data) copyCSVEbp() {
 	dlgPath := path.Join(d.SrcFile, d.getFolderDLG())
 
-	CopyFile(path.Join(dlgPath, NameTCable), path.Join(d.DstFile, NameTCable))
-	CopyFile(path.Join(dlgPath, NameTCassette), path.Join(d.DstFile, NameTCassette))
 	CopyFile(path.Join(dlgPath, NameTEbp), path.Join(d.DstFile, NameTEbp))
-	CopyFile(path.Join(dlgPath, NameTFibre), path.Join(d.DstFile, NameTFibre))
-	CopyFile(path.Join(dlgPath, NameTPosition), path.Join(d.DstFile, NameTPosition))
-	CopyFile(path.Join(dlgPath, NameTTiroir), path.Join(d.DstFile, NameTTiroir))
+	CopyFile(path.Join(dlgPath, NameTPtech), path.Join(d.DstFile, NameTPtech))
+	CopyFile(path.Join(dlgPath, NameTReference), path.Join(d.DstFile, NameTReference))
 }
 
-func (d *Data) countPositions() {
-	tPositionPath := path.Join(d.DstFile, NameTPosition)
-	CsvData := ReadCSV(tPositionPath)
+func (d *Data) countEbp() {
+	tEbpPath := path.Join(d.DstFile, NameTEbp)
+	CsvData := ReadCSV(tEbpPath)
 	d.NbrItems = len(CsvData)
 }
 
-func (d *Data) appendDatasInStructs() {
-	appendFibre(path.Join(d.DstFile, NameTFibre))
-	appendCable(path.Join(d.DstFile, NameTCable))
-	appendCassette(path.Join(d.DstFile, NameTCassette))
-	appendEbp(path.Join(d.DstFile, NameTEbp))
-	appendTirroir(path.Join(d.DstFile, NameTTiroir))
+func (d *Data) appendEbpDatasInStructs() {
+	appendPtech(path.Join(d.DstFile, NameTPtech))
+	appendReference(path.Join(d.DstFile, NameTReference))
 }
 
 func (d *Data) runConcat(file string) {

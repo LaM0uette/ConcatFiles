@@ -6,10 +6,10 @@ import (
 )
 
 type Data struct {
-	SrcFile string
-	DstFile string
-	XlFile  string
-	NbrPos  int
+	SrcFile  string
+	DstFile  string
+	XlFile   string
+	NbrItems int
 }
 
 var (
