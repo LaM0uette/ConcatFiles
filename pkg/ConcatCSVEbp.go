@@ -85,21 +85,21 @@ func (d *Data) runConcatEbp(file string) {
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("S%v", r), val[15])  //bp_typephy
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("T%v", r), val[16])  //bp_typelog
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("U%v", r), val[17])  //t_ref
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("W%v", r), rf[0])    //rf_type
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("X%v", r), rf[1])    //rf_fabric
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("Y%v", r), val[18])  //bp_entrees
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("Z%v", r), val[19])  //bp_ref_kit
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AA%v", r), val[20]) //bp_ca_nb
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AB%v", r), val[21]) //bp_nb_pas
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AC%v", r), val[22]) //bp_linecod
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AD%v", r), val[23]) //bp_oc_code
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AE%v", r), val[24]) //bp_racco
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AF%v", r), val[25]) //bp_comment
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AG%v", r), val[26]) //bp_creadat
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AH%v", r), val[27]) //bp_majdate
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AI%v", r), val[28]) //bp_majsrc
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AJ%v", r), val[29]) //bp_abddate
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AK%v", r), val[30]) //bp_abdsrc
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("V%v", r), rf[0])    //rf_type
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("W%v", r), rf[1])    //rf_fabric
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("X%v", r), val[18])  //bp_entrees
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("Y%v", r), val[19])  //bp_ref_kit
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("Z%v", r), val[20])  //bp_ca_nb
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AA%v", r), val[21]) //bp_nb_pas
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AB%v", r), val[22]) //bp_linecod
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AC%v", r), val[23]) //bp_oc_code
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AD%v", r), val[24]) //bp_racco
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AE%v", r), val[25]) //bp_comment
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AF%v", r), val[26]) //bp_creadat
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AG%v", r), val[27]) //bp_majdate
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AH%v", r), val[28]) //bp_majsrc
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AI%v", r), val[29]) //bp_abddate
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AJ%v", r), val[30]) //bp_abdsrc
 
 		if len(TEbpErr) > 0 {
 			if checkEbpErr(val[0]) {
@@ -141,21 +141,21 @@ func (d *Data) setFormatingWbEbp() {
 		"S1":  "bp_typephy",
 		"T1":  "bp_typelog",
 		"U1":  "t_ref",
-		"W1":  "rf_type",
-		"X1":  "rf_fabric",
-		"Y1":  "bp_entrees",
-		"Z1":  "bp_ref_kit",
-		"AA1": "bp_ca_nb",
-		"AB1": "bp_nb_pas",
-		"AC1": "bp_linecod",
-		"AD1": "bp_oc_code",
-		"AE1": "bp_racco",
-		"AF1": "bp_comment",
-		"AG1": "bp_creadat",
-		"AH1": "bp_majdate",
-		"AI1": "bp_majsrc",
-		"AJ1": "bp_abddate",
-		"AK1": "bp_abdsrc",
+		"V1":  "rf_type",
+		"W1":  "rf_fabric",
+		"X1":  "bp_entrees",
+		"Y1":  "bp_ref_kit",
+		"Z1":  "bp_ca_nb",
+		"AA1": "bp_nb_pas",
+		"AB1": "bp_linecod",
+		"AC1": "bp_oc_code",
+		"AD1": "bp_racco",
+		"AE1": "bp_comment",
+		"AF1": "bp_creadat",
+		"AG1": "bp_majdate",
+		"AH1": "bp_majsrc",
+		"AI1": "bp_abddate",
+		"AJ1": "bp_abdsrc",
 	}
 
 	for header := range headers {

@@ -15,7 +15,7 @@ import (
 )
 
 func main() {
-	FlgMode := flag.String("m", "jointureGrace", "Mode de compilation")
+	FlgMode := flag.String("m", "jointureEbp", "Mode de compilation")
 	//jointureEbp
 	flag.Parse()
 
