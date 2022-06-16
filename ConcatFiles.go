@@ -2,6 +2,7 @@
 package main
 
 import (
+	"ConcatFiles/config"
 	"ConcatFiles/loger"
 	"ConcatFiles/pkg"
 	"ConcatFiles/rgb"
@@ -15,19 +16,22 @@ import (
 
 func main() {
 	FlgMode := flag.String("m", "jointureGrace", "Mode de compilation")
+	//jointureEbp
 	flag.Parse()
 
 	txtMode := ""
 	switch *FlgMode {
 	case "jointureGrace":
 		txtMode = "Jointure Grace"
+	case "jointureEbp":
+		txtMode = "Jointure Ebp"
 	}
 
 	pkg.DrawStart(txtMode)
 	pkg.DrawSep("BUILD")
 
-	//srcFile := "C:\\Users\\XD5965\\OneDrive - EQUANS\\Bureau\\DLG"
-	srcFile := pkg.GetCurrentDir()
+	srcFile := "C:\\Users\\XD5965\\OneDrive - EQUANS\\Bureau\\EBP"
+	//srcFile := pkg.GetCurrentDir()
 	dstFile := path.Join(srcFile, "__Concat__")
 	xlFile := path.Join(dstFile, fmt.Sprintf("__Export_%v.xlsm", time.Now().Format("20060102150405")))
 
@@ -42,7 +46,10 @@ func main() {
 
 	switch *FlgMode {
 	case "jointureGrace":
-		d.CopyExcelFile("T:\\- 4 Suivi Appuis\\26_MACROS\\GO\\ConcatFiles\\Docs\\MJG.xlsm")
+		d.CopyExcelFile(path.Join(config.PathXlsm, "MJG.xlsm"))
+		d.ConcatCSVGrace()
+	case "jointureEbp":
+		d.CopyExcelFile(path.Join(config.PathXlsm, "MJEbp.xlsm"))
 		d.ConcatCSVGrace()
 	}
 

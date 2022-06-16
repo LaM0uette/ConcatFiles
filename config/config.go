@@ -10,6 +10,8 @@ const (
 	Name    = "ConcatFiles"
 	Author  = "LaM0uette"
 	Version = "1.0.2"
+
+	PathXlsm = "T:\\- 4 Suivi Appuis\\26_MACROS\\GO\\ConcatFiles\\Docs"
 )
 
 var (
