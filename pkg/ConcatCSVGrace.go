@@ -25,7 +25,7 @@ func (d *Data) ConcatCSVGrace() {
 	DrawParam("AJOUT DES DONNÉES DANS LES STRUCTS:", "OK")
 
 	DrawSep("COMPILATION")
-	d.runConcat(path.Join(d.DstFile, NameTPosition))
+	d.runConcatGrace(path.Join(d.DstFile, NameTPosition))
 
 	if err := Wba.SaveAs(d.XlFile); err != nil {
 		loger.Error("Erreur pendant la sauvegarde du fichier Excel:", err)
@@ -59,7 +59,7 @@ func (d *Data) appendDatasInStructs() {
 	appendTirroir(path.Join(d.DstFile, NameTTiroir))
 }
 
-func (d *Data) runConcat(file string) {
+func (d *Data) runConcatGrace(file string) {
 	CsvData := ReadCSV(file)
 	Sht := "Sheet1"
 	NbrTot := 0

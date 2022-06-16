@@ -24,6 +24,7 @@ type Fibre struct {
 type Ptech struct {
 	PtCode,
 	PtEti,
+	PtNdCode,
 	PtAdCode string
 }
 type Reference struct {

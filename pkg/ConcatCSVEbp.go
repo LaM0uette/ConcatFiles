@@ -25,7 +25,7 @@ func (d *Data) ConcatCSVEbp() {
 	DrawParam("AJOUT DES DONNÉES DANS LES STRUCTS:", "OK")
 
 	DrawSep("COMPILATION")
-	d.runConcat(path.Join(d.DstFile, NameTPosition))
+	d.runConcatEbp(path.Join(d.DstFile, NameTEbp))
 
 	if err := Wba.SaveAs(d.XlFile); err != nil {
 		loger.Error("Erreur pendant la sauvegarde du fichier Excel:", err)
@@ -53,7 +53,7 @@ func (d *Data) appendEbpDatasInStructs() {
 	appendReference(path.Join(d.DstFile, NameTReference))
 }
 
-func (d *Data) runConcat(file string) {
+func (d *Data) runConcatEbp(file string) {
 	CsvData := ReadCSV(file)
 	Sht := "Sheet1"
 	NbrTot := 0
@@ -67,31 +67,43 @@ func (d *Data) runConcat(file string) {
 		bp := getDataEbp(cs[1])       //csCode
 		ti := getDataTirroir(val[5])  //tiCode
 
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("A%v", r), val[0])  //PsCode
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("B%v", r), val[1])  //PsNum
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("C%v", r), val[2])  //Ps1
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("D%v", r), fo1[0])  //FoNumTube1
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("E%v", r), fo1[1])  //FoColor1
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("F%v", r), fo1[2])  //CbEti1
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("G%v", r), val[3])  //Ps2
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("H%v", r), fo2[0])  //FoNumTube2
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("I%v", r), fo2[1])  //FoColor2
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("J%v", r), fo2[2])  //CbEti2
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("K%v", r), val[4])  //PsCsCode
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("L%v", r), cs[0])   //CsNum
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("M%v", r), bp)      //BpEti
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("N%v", r), val[5])  //PsTiCode
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("O%v", r), ti)      //TiEti
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("P%v", r), val[6])  //PsType
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("Q%v", r), val[7])  //PsFunc
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("R%v", r), val[8])  //PsState
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("S%v", r), val[9])  //PsPreaff
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("T%v", r), val[10]) //PsComment
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("U%v", r), val[11]) //PsCreaDate
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("V%v", r), val[12]) //PsMajDate
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("W%v", r), val[13]) //PsMajSrc
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("X%v", r), val[14]) //PsAbdDate
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("Y%v", r), val[15]) //PsAbdSrc
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("A%v", r), val[0])   //bp_code
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("B%v", r), val[1])   //bp_etiquet
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("C%v", r), val[2])   //bp_codeext
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("D%v", r), val[3])   //t_ptech
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("E%v", r), val[])   //pt_etiquet
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("F%v", r), val[])   //pt_nd_code
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("G%v", r), val[])   //pt_ad_code
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("H%v", r), val[4])   //bp_lt_code
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("I%v", r), val[5])   //bp_sf_code
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("J%v", r), val[6])   //bp_prop
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("K%v", r), val[7])   //bp_gest
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("L%v", r), val[8])    //bp_user
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("M%v", r), val[9])       //bp_proptyp
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("N%v", r), val[10])   //bp_statut
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("O%v", r), val[11])       //bp_etat
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("P%v", r), val[12])   //bp_occp
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("Q%v", r), val[13])   //bp_datemes
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("R%v", r), val[14])   //bp_avct
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("S%v", r), val[15])   //bp_typephy
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("T%v", r), val[16])  //bp_typelog
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("U%v", r), val[17])  //t_ref
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("V%v", r), val[])  //rf_code
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("W%v", r), val[])  //rf_type
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("X%v", r), val[])  //rf_fabric
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("Y%v", r), val[18])  //bp_entrees
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("Z%v", r), val[19])  //bp_ref_kit
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AA%v", r), val[20]) //bp_ca_nb
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AB%v", r), val[21]) //bp_nb_pas
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AC%v", r), val[22]) //bp_linecod
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AD%v", r), val[23]) //bp_oc_code
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AE%v", r), val[24]) //bp_racco
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AF%v", r), val[25]) //bp_comment
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AG%v", r), val[26]) //bp_creadat
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AH%v", r), val[27]) //bp_majdate
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AI%v", r), val[28]) //bp_majsrc
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AJ%v", r), val[29]) //bp_abddate
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AK%v", r), val[30]) //bp_abdsrc
 
 		if len(TPositionErr) > 0 {
 			if checkPosErr(val[0]) {
@@ -108,7 +120,7 @@ func (d *Data) runConcat(file string) {
 	}
 
 	d.setFormatingWb()
-	loger.Ok(fmt.Sprintf("%v positions concaténées", NbrTot))
+	loger.Ok(fmt.Sprintf("%v ebp concaténées", NbrTot))
 }
 
 //...

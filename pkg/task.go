@@ -225,6 +225,7 @@ func appendPtech(file string) {
 		Item := Ptech{
 			PtCode:   val[0],
 			PtEti:    val[2],
+			PtNdCode: val[3],
 			PtAdCode: val[4],
 		}
 		TPtech = append(TPtech, Item)
