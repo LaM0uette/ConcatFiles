@@ -146,14 +146,14 @@ func (d *Data) checkIfErrExist() {
 			break
 		}
 
-		if sheet.Name == "POSITION" {
+		if sheet.Name == "EBP" {
 			counter := 0
 
 			for i := 0; i < sheet.MaxRow; i++ {
 				cell, _ := sheet.Cell(i, 1)
-				if strings.Contains(cell.Value, "PS") {
-					p := PositionErr{PsCode: cell.Value}
-					TPositionErr = append(TPositionErr, p)
+				if strings.Contains(cell.Value, "BP") {
+					bp := EbpErr{BpCode: cell.Value}
+					TEbpErr = append(TEbpErr, bp)
 					counter++
 				}
 			}

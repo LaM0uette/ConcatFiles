@@ -106,10 +106,7 @@ func (d *Data) runConcatEbp(file string) {
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AK%v", r), val[30]) //bp_abdsrc
 
 		if len(TPositionErr) > 0 {
-			if checkPosErr(val[0]) {
-				//style := xlsx.NewStyle()
-				//style.Font.Color = "FFC000"
-
+			if checkEbpErr(val[0]) {
 				style, _ := Wba.NewStyle(fmt.Sprintf("{\"fill\":{\"type\":\"pattern\",\"color\":[\"#%s\"],\"pattern\":1}}", "FFC000"))
 				_ = Wba.SetCellStyle(Sht, fmt.Sprintf("A%v", r), fmt.Sprintf("A%v", r), style)
 			}
@@ -180,7 +177,7 @@ func (d *Data) setFormatingWb() {
 	//Sht.SetColWidth(16, 18, 8)
 }
 
-func checkPosErr(ps string) bool {
+func checkEbpErr(ps string) bool {
 	for _, data := range TPositionErr {
 		if ps == data.PsCode {
 			return true

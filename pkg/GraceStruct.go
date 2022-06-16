@@ -41,6 +41,10 @@ type PositionErr struct {
 	PsCode string
 }
 
+type EbpErr struct {
+	BpCode string
+}
+
 var (
 	Wba        *excelize.File
 	fitToWidth excelize.FitToWidth
@@ -63,4 +67,5 @@ var (
 	TTirroir   []Tirroir
 
 	TPositionErr []PositionErr
+	TEbpErr      []EbpErr
 )
