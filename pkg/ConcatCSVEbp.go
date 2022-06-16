@@ -61,36 +61,32 @@ func (d *Data) runConcatEbp(file string) {
 	for r, val := range CsvData {
 		r++
 
-		fo1 := getDataFibre(val[2])   //ps1 et cb1
-		fo2 := getDataFibre(val[3])   //ps2 et cb2
-		cs := getDataCassette(val[4]) //psCsCode
-		bp := getDataEbp(cs[1])       //csCode
-		ti := getDataTirroir(val[5])  //tiCode
+		pt := GetDataPtech(val[3])
+		rf := GetDataReference(val[17])
 
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("A%v", r), val[0])   //bp_code
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("B%v", r), val[1])   //bp_etiquet
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("C%v", r), val[2])   //bp_codeext
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("D%v", r), val[3])   //t_ptech
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("E%v", r), val[])   //pt_etiquet
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("F%v", r), val[])   //pt_nd_code
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("G%v", r), val[])   //pt_ad_code
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("E%v", r), pt[0])    //pt_etiquet
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("F%v", r), pt[1])    //pt_nd_code
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("G%v", r), pt[2])    //pt_ad_code
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("H%v", r), val[4])   //bp_lt_code
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("I%v", r), val[5])   //bp_sf_code
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("J%v", r), val[6])   //bp_prop
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("K%v", r), val[7])   //bp_gest
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("L%v", r), val[8])    //bp_user
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("M%v", r), val[9])       //bp_proptyp
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("N%v", r), val[10])   //bp_statut
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("O%v", r), val[11])       //bp_etat
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("P%v", r), val[12])   //bp_occp
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("Q%v", r), val[13])   //bp_datemes
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("R%v", r), val[14])   //bp_avct
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("S%v", r), val[15])   //bp_typephy
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("L%v", r), val[8])   //bp_user
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("M%v", r), val[9])   //bp_proptyp
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("N%v", r), val[10])  //bp_statut
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("O%v", r), val[11])  //bp_etat
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("P%v", r), val[12])  //bp_occp
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("Q%v", r), val[13])  //bp_datemes
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("R%v", r), val[14])  //bp_avct
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("S%v", r), val[15])  //bp_typephy
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("T%v", r), val[16])  //bp_typelog
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("U%v", r), val[17])  //t_ref
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("V%v", r), val[])  //rf_code
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("W%v", r), val[])  //rf_type
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("X%v", r), val[])  //rf_fabric
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("W%v", r), rf[0])    //rf_type
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("X%v", r), rf[1])    //rf_fabric
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("Y%v", r), val[18])  //bp_entrees
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("Z%v", r), val[19])  //bp_ref_kit
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AA%v", r), val[20]) //bp_ca_nb
@@ -105,7 +101,7 @@ func (d *Data) runConcatEbp(file string) {
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AJ%v", r), val[29]) //bp_abddate
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("AK%v", r), val[30]) //bp_abdsrc
 
-		if len(TPositionErr) > 0 {
+		if len(TEbpErr) > 0 {
 			if checkEbpErr(val[0]) {
 				style, _ := Wba.NewStyle(fmt.Sprintf("{\"fill\":{\"type\":\"pattern\",\"color\":[\"#%s\"],\"pattern\":1}}", "FFC000"))
 				_ = Wba.SetCellStyle(Sht, fmt.Sprintf("A%v", r), fmt.Sprintf("A%v", r), style)
@@ -116,13 +112,13 @@ func (d *Data) runConcatEbp(file string) {
 		loger.Void(fmt.Sprintf("%v/%v", NbrTot, d.NbrItems))
 	}
 
-	d.setFormatingWb()
+	d.setFormatingWbEbp()
 	loger.Ok(fmt.Sprintf("%v ebp concaténées", NbrTot))
 }
 
 //...
 // Actions
-func (d *Data) setFormatingWb() {
+func (d *Data) setFormatingWbEbp() {
 	headers := map[string]string{
 		"A1": "ps_code",
 		"B1": "ps_numero",
@@ -177,58 +173,11 @@ func (d *Data) setFormatingWb() {
 	//Sht.SetColWidth(16, 18, 8)
 }
 
-func checkEbpErr(ps string) bool {
-	for _, data := range TPositionErr {
-		if ps == data.PsCode {
+func checkEbpErr(bp string) bool {
+	for _, data := range TEbpErr {
+		if bp == data.BpCode {
 			return true
 		}
 	}
 	return false
-}
-
-//...
-// GetData
-func getDataFibre(ps string) []string {
-	for _, data := range TFibre {
-		if ps == data.FoCode {
-
-			var cb string
-			for _, cbs := range TCable {
-				if cbs.CbCode == data.FoCbCode {
-					cb = cbs.CbEti
-					break
-				}
-			}
-
-			return []string{data.FoNumTube, data.FoColor, cb}
-		}
-	}
-	return []string{"", "", ""}
-}
-
-func getDataCassette(cs string) []string {
-	for _, data := range TCassette {
-		if cs == data.CsCode {
-			return []string{data.CsNum, data.CsBpCode}
-		}
-	}
-	return []string{"", ""}
-}
-
-func getDataEbp(bp string) string {
-	for _, data := range TEbp {
-		if bp == data.BpCode {
-			return data.BpEti
-		}
-	}
-	return ""
-}
-
-func getDataTirroir(ti string) string {
-	for _, data := range TTirroir {
-		if ti == data.TiCode {
-			return data.TiEti
-		}
-	}
-	return ""
 }

@@ -256,3 +256,68 @@ func appendTirroir(file string) {
 		TTirroir = append(TTirroir, Item)
 	}
 }
+
+//...
+// GetData
+func GetDataCassette(cs string) []string {
+	for _, data := range TCassette {
+		if cs == data.CsCode {
+			return []string{data.CsNum, data.CsBpCode}
+		}
+	}
+	return []string{"", ""}
+}
+
+func GetDataEbp(bp string) string {
+	for _, data := range TEbp {
+		if bp == data.BpCode {
+			return data.BpEti
+		}
+	}
+	return ""
+}
+
+func GetDataFibre(ps string) []string {
+	for _, data := range TFibre {
+		if ps == data.FoCode {
+
+			var cb string
+			for _, cbs := range TCable {
+				if cbs.CbCode == data.FoCbCode {
+					cb = cbs.CbEti
+					break
+				}
+			}
+
+			return []string{data.FoNumTube, data.FoColor, cb}
+		}
+	}
+	return []string{"", "", ""}
+}
+
+func GetDataPtech(pt string) []string {
+	for _, data := range TPtech {
+		if pt == data.PtCode {
+			return []string{data.PtEti, data.PtNdCode, data.PtAdCode}
+		}
+	}
+	return []string{"", "", ""}
+}
+
+func GetDataReference(rf string) []string {
+	for _, data := range TReference {
+		if rf == data.RfCode {
+			return []string{data.RfType, data.RfFabric}
+		}
+	}
+	return []string{"", ""}
+}
+
+func GetDataTirroir(ti string) string {
+	for _, data := range TTirroir {
+		if ti == data.TiCode {
+			return data.TiEti
+		}
+	}
+	return ""
+}

@@ -67,11 +67,11 @@ func (d *Data) runConcatGrace(file string) {
 	for r, val := range CsvData {
 		r++
 
-		fo1 := getDataFibre(val[2])   //ps1 et cb1
-		fo2 := getDataFibre(val[3])   //ps2 et cb2
-		cs := getDataCassette(val[4]) //psCsCode
-		bp := getDataEbp(cs[1])       //csCode
-		ti := getDataTirroir(val[5])  //tiCode
+		fo1 := GetDataFibre(val[2])   //ps1 et cb1
+		fo2 := GetDataFibre(val[3])   //ps2 et cb2
+		cs := GetDataCassette(val[4]) //psCsCode
+		bp := GetDataEbp(cs[1])       //csCode
+		ti := GetDataTirroir(val[5])  //tiCode
 
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("A%v", r), val[0])  //PsCode
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("B%v", r), val[1])  //PsNum
@@ -113,13 +113,13 @@ func (d *Data) runConcatGrace(file string) {
 		loger.Void(fmt.Sprintf("%v/%v", NbrTot, d.NbrItems))
 	}
 
-	d.setFormatingWb()
+	d.setFormatingWbGrace()
 	loger.Ok(fmt.Sprintf("%v positions concaténées", NbrTot))
 }
 
 //...
 // Actions
-func (d *Data) setFormatingWb() {
+func (d *Data) setFormatingWbGrace() {
 	headers := map[string]string{
 		"A1": "ps_code",
 		"B1": "ps_numero",
@@ -181,51 +181,4 @@ func checkPosErr(ps string) bool {
 		}
 	}
 	return false
-}
-
-//...
-// GetData
-func getDataFibre(ps string) []string {
-	for _, data := range TFibre {
-		if ps == data.FoCode {
-
-			var cb string
-			for _, cbs := range TCable {
-				if cbs.CbCode == data.FoCbCode {
-					cb = cbs.CbEti
-					break
-				}
-			}
-
-			return []string{data.FoNumTube, data.FoColor, cb}
-		}
-	}
-	return []string{"", "", ""}
-}
-
-func getDataCassette(cs string) []string {
-	for _, data := range TCassette {
-		if cs == data.CsCode {
-			return []string{data.CsNum, data.CsBpCode}
-		}
-	}
-	return []string{"", ""}
-}
-
-func getDataEbp(bp string) string {
-	for _, data := range TEbp {
-		if bp == data.BpCode {
-			return data.BpEti
-		}
-	}
-	return ""
-}
-
-func getDataTirroir(ti string) string {
-	for _, data := range TTirroir {
-		if ti == data.TiCode {
-			return data.TiEti
-		}
-	}
-	return ""
 }
