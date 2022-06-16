@@ -4,15 +4,29 @@ Windows Registry Editor Version 5.00
 [-HKEY_CURRENT_USER\Software\Classes\directory\Background\Shell\ConcatFiles\shell\01subcmd]
 [-HKEY_CURRENT_USER\Software\Classes\directory\Background\Shell\ConcatFiles\shell\01subcmd\command]
 
-[HKEY_CURRENT_USER\Software\Classes\directory\Background\Shell\ConcatFiles]
+[-HKEY_CURRENT_USER\Software\Classes\directory\Background\Shell\Outils Geomap]
+[-HKEY_CURRENT_USER\Software\Classes\directory\Background\Shell\Outils Geomap\shell\01subcmd]
+[-HKEY_CURRENT_USER\Software\Classes\directory\Background\Shell\Outils Geomap\shell\01subcmd\command]
+[-HKEY_CURRENT_USER\Software\Classes\directory\Background\Shell\Outils Geomap\shell\02subcmd]
+[-HKEY_CURRENT_USER\Software\Classes\directory\Background\Shell\Outils Geomap\shell\02subcmd\command]
+
+[HKEY_CURRENT_USER\Software\Classes\directory\Background\Shell\Outils Geomap]
 "Position"="Top"
 "Icon"="T:\\- 4 Suivi Appuis\\26_MACROS\\GO\\ConcatFiles\\Docs\\ConcatFiles.ico"
 "SubCommands"=""
 
 
-[HKEY_CURRENT_USER\Software\Classes\directory\Background\Shell\ConcatFiles\shell\01subcmd]
+[HKEY_CURRENT_USER\Software\Classes\directory\Background\Shell\Outils Geomap\shell\01subcmd]
 "Icon"="T:\\- 4 Suivi Appuis\\26_MACROS\\GO\\ConcatFiles\\Docs\\ConcatFiles.ico"
 "MUIVerb"="Jointure Grace"
  
-[HKEY_CURRENT_USER\Software\Classes\directory\Background\Shell\ConcatFiles\shell\01subcmd\command]
+[HKEY_CURRENT_USER\Software\Classes\directory\Background\Shell\Outils Geomap\shell\01subcmd\command]
 @="T:\\- 4 Suivi Appuis\\26_MACROS\\GO\\ConcatFiles\\ConcatFiles.exe -m=jointureGrace"
+
+
+[HKEY_CURRENT_USER\Software\Classes\directory\Background\Shell\Outils Geomap\shell\02subcmd]
+"Icon"="T:\\- 4 Suivi Appuis\\26_MACROS\\GO\\ConcatFiles\\Docs\\ConcatFiles.ico"
+"MUIVerb"="Jointure Ebp"
+ 
+[HKEY_CURRENT_USER\Software\Classes\directory\Background\Shell\Outils Geomap\shell\02subcmd\command]
+@="T:\\- 4 Suivi Appuis\\26_MACROS\\GO\\ConcatFiles\\ConcatFiles.exe -m=jointureEbp"
