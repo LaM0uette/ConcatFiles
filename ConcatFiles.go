@@ -30,6 +30,7 @@ func main() {
 	pkg.DrawStart(txtMode)
 	pkg.DrawSep("BUILD")
 
+	//srcFile := "C:\\Users\\XD5965\\OneDrive - EQUANS\\Bureau\\DLG"
 	srcFile := "C:\\Users\\XD5965\\OneDrive - EQUANS\\Bureau\\EBP"
 	//srcFile := pkg.GetCurrentDir()
 	dstFile := path.Join(srcFile, "__Concat__")

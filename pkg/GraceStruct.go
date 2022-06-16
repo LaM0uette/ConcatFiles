@@ -1,27 +1,27 @@
 package pkg
 
 type Fibre struct {
-	FoCode    string
-	FoNumTube string
-	FoColor   string
-	FoCbCode  string
+	FoCode,
+	FoNumTube,
+	FoColor,
+	FoCbCode string
 }
 type Cable struct {
-	CbCode string
-	CbEti  string
+	CbCode,
+	CbEti string
 }
 type Cassette struct {
-	CsCode   string
-	CsNum    string
+	CsCode,
+	CsNum,
 	CsBpCode string
 }
 type Ebp struct {
-	BpCode string
-	BpEti  string
+	BpCode,
+	BpEti string
 }
 type Tirroir struct {
-	TiCode string
-	TiEti  string
+	TiCode,
+	TiEti string
 }
 type PositionErr struct {
 	PsCode string
