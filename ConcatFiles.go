@@ -22,9 +22,9 @@ func main() {
 	txtMode := ""
 	switch *FlgMode {
 	case "jointureGrace":
-		txtMode = "Jointure Grace"
+		txtMode = "Grace"
 	case "jointureEbp":
-		txtMode = "Jointure Ebp"
+		txtMode = "Ebp"
 	}
 
 	pkg.DrawStart(txtMode)
@@ -34,7 +34,7 @@ func main() {
 	//srcFile := "C:\\Users\\XD5965\\OneDrive - EQUANS\\Bureau\\EBP"
 	srcFile := pkg.GetCurrentDir()
 	dstFile := path.Join(srcFile, "__Concat__")
-	xlFile := path.Join(dstFile, fmt.Sprintf("__Export_%v.xlsm", time.Now().Format("20060102150405")))
+	xlFile := path.Join(dstFile, fmt.Sprintf("__Export%s_%v.xlsm", txtMode, time.Now().Format("20060102150405")))
 
 	d := pkg.Data{
 		SrcFile: srcFile,
