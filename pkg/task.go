@@ -77,6 +77,11 @@ func ReadCSV(file string) [][]string {
 func (d *Data) getFolderDLG() string {
 	var dlg string
 
+	if len(os.Args) > 2 {
+		DrawParam("DOSSIER COURANT:", "OK")
+		return filepath.Base(os.Args[2])
+	}
+
 	err := filepath.Walk(d.SrcFile, func(path string, fileInfo os.FileInfo, err error) error {
 		if fileInfo.IsDir() && strings.Contains(fileInfo.Name(), "-DLG-") && !strings.Contains(fileInfo.Name(), "_") {
 			dlg = fileInfo.Name()
