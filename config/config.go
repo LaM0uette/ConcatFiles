@@ -9,7 +9,7 @@ import (
 const (
 	Name    = "ConcatFiles"
 	Author  = "LaM0uette"
-	Version = "1.2.2"
+	Version = "1.3.0"
 
 	PathXlsm = "T:\\- 4 Suivi Appuis\\26_MACROS\\GO\\ConcatFiles\\Docs"
 )

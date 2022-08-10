@@ -18,7 +18,7 @@ type Ebp struct {
 type Fibre struct {
 	FoCode,
 	FoNumTube,
-	FoColor,
+	FoNintub,
 	FoCbCode string
 }
 type Ptech struct {

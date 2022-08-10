@@ -20,19 +20,16 @@ const (
 
 	author  = `Auteur:  `
 	version = `Version: `
-	mode    = `Mode:    `
 )
 
-func DrawStart(txt string) {
+func DrawStart() {
 	defer time.Sleep(1 * time.Second)
 
 	loger.Ui(start)
-	loger.Ui("\t\t", mode+"Jointure"+txt, "\n")
 	loger.Ui("\t\t", author+config.Author, "\n", "\t\t", version+config.Version)
 	loger.Ui("\n")
 
 	rgb.Green.Println(start)
-	fmt.Print("\t\t", mode+rgb.Green.Sprint("Jointure"+txt), "\n")
 	fmt.Print("\t\t", author+rgb.Green.Sprint(config.Author), "\n", "\t\t", version+rgb.Green.Sprint(config.Version))
 	fmt.Print("\n\n")
 }

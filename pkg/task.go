@@ -216,7 +216,7 @@ func appendFibre(file string) {
 		Item := Fibre{
 			FoCode:    val[0],
 			FoNumTube: val[4],
-			FoColor:   val[8],
+			FoNintub:  val[5],
 			FoCbCode:  val[2],
 		}
 		TFibre = append(TFibre, Item)
@@ -294,7 +294,7 @@ func GetDataFibre(ps string) []string {
 				}
 			}
 
-			return []string{data.FoNumTube, data.FoColor, cb}
+			return []string{data.FoNumTube, data.FoNintub, cb}
 		}
 	}
 	return []string{"", "", ""}
