@@ -28,7 +28,7 @@ func (d *Data) ConcatCSVGrace() {
 	DrawParam("TRIAGE DES DONNÉES:", "OK")
 
 	DrawSep("COMPILATION")
-	d.runConcatGrace(path.Join(d.DstFile, NameTPosition))
+	d.runConcatGrace()
 
 	if err := Wba.SaveAs(d.XlFile); err != nil {
 		loger.Error("Erreur pendant la sauvegarde du fichier Excel:", err)
@@ -69,7 +69,7 @@ func (d *Data) appendDatasInStructs() {
 	appendTirroir(path.Join(d.DstFile, NameTTiroir))
 }
 
-func (d *Data) runConcatGrace(file string) {
+func (d *Data) runConcatGrace() {
 	Sht := "Sheet1"
 	NbrTot := 0
 
@@ -78,7 +78,7 @@ func (d *Data) runConcatGrace(file string) {
 
 		fo1 := GetDataFibre(pos.Ps1)
 		fo2 := GetDataFibre(pos.Ps2)
-		cs := GetDataCassette(pos.PsCode)
+		cs := GetDataCassette(pos.PsCsCode)
 		bp := GetDataEbp(cs[1])
 		ti := GetDataTirroir(pos.PsTiCode)
 
