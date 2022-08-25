@@ -397,6 +397,7 @@ func appendGraceLight() {
 			PsCsCode:   pos.PsCsCode,
 			CsNum:      CsNumInt,
 			BpEti:      bp,
+			PsTiCode:   pos.PsTiCode,
 			PsType:     pos.PsType,
 			PsFunc:     pos.PsFunc,
 			PsState:    pos.PsState,

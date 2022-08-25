@@ -98,6 +98,7 @@ type GraceLight struct {
 	PsCsCode string
 	CsNum    int
 	BpEti,
+	PsTiCode,
 	PsType,
 	PsFunc,
 	PsState,
