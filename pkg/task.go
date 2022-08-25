@@ -196,10 +196,6 @@ func appendCassette(file string) {
 		}
 		TCassette = append(TCassette, Item)
 	}
-
-	sort.Slice(TCassette, func(i, j int) bool {
-		return TCassette[i].CsNum < TCassette[j].CsNum
-	})
 }
 
 func appendEbp(file string) {
@@ -212,10 +208,6 @@ func appendEbp(file string) {
 		}
 		TEbp = append(TEbp, Item)
 	}
-
-	sort.Slice(TEbp, func(i, j int) bool {
-		return TEbp[i].BpEti < TEbp[j].BpEti
-	})
 }
 
 func appendFibre(file string) {
@@ -260,10 +252,6 @@ func appendPosition(file string) {
 		}
 		TPosition = append(TPosition, Item)
 	}
-
-	sort.Slice(TPosition, func(i, j int) bool {
-		return TPosition[i].PsNum < TPosition[j].PsNum
-	})
 }
 
 func appendPtech(file string) {
@@ -340,6 +328,7 @@ func appendGraceAll() {
 			PsMajSrc:   pos.PsMajSrc,
 			PsAbdDate:  pos.PsAbdDate,
 			PsAbdSrc:   pos.PsAbdSrc,
+			OrderStr:   fmt.Sprintf("%s_%s", bp, cs[0]),
 		}
 		TGraceAll = append(TGraceAll, Item)
 	}
