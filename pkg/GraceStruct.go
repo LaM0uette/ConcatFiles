@@ -21,6 +21,24 @@ type Fibre struct {
 	FoNintub,
 	FoCbCode string
 }
+type Position struct {
+	PsCode string
+	PsNum  int
+	Ps1,
+	Ps2,
+	PsCsCode,
+	PsTiCode,
+	PsType,
+	PsFunc,
+	PsState,
+	PsPreaff,
+	PsComment,
+	PsCreaDate,
+	PsMajDate,
+	PsMajSrc,
+	PsAbdDate,
+	PsAbdSrc string
+}
 type Ptech struct {
 	PtCode,
 	PtEti,
@@ -40,7 +58,6 @@ type Tirroir struct {
 type PositionErr struct {
 	PsCode string
 }
-
 type EbpErr struct {
 	BpCode string
 }
@@ -62,6 +79,7 @@ var (
 	TCassette  []Cassette
 	TEbp       []Ebp
 	TFibre     []Fibre
+	TPosition  []Position
 	TPtech     []Ptech
 	TReference []Reference
 	TTirroir   []Tirroir
