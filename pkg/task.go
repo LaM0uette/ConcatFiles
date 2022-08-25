@@ -288,6 +288,46 @@ func appendTirroir(file string) {
 	}
 }
 
+func appendGraceAll() {
+	for _, pos := range TPosition {
+
+		fo1 := GetDataFibre(pos.Ps1)
+		fo2 := GetDataFibre(pos.Ps2)
+		cs := GetDataCassette(pos.PsCsCode)
+		bp := GetDataEbp(cs[1])
+		ti := GetDataTirroir(pos.PsTiCode)
+
+		Item := GraceAll{
+			PsCode:     pos.PsCode,
+			PsNum:      pos.PsNum,
+			Ps1:        pos.Ps1,
+			FoNumTube1: fo1[0],
+			FoNintub1:  fo1[1],
+			CbEti1:     fo1[2],
+			Ps2:        pos.Ps2,
+			FoNumTube2: fo2[0],
+			FoNintub2:  fo2[1],
+			CbEti2:     fo2[2],
+			PsCsCode:   pos.PsCode,
+			CsNum:      cs[0],
+			BpEti:      bp,
+			PsTiCode:   pos.PsTiCode,
+			TiEti:      ti,
+			PsType:     pos.PsType,
+			PsFunc:     pos.PsFunc,
+			PsState:    pos.PsState,
+			PsPreaff:   pos.PsPreaff,
+			PsComment:  pos.PsComment,
+			PsCreaDate: pos.PsCreaDate,
+			PsMajDate:  pos.PsMajDate,
+			PsMajSrc:   pos.PsMajSrc,
+			PsAbdDate:  pos.PsAbdDate,
+			PsAbdSrc:   pos.PsAbdSrc,
+		}
+		TGraceAll = append(TGraceAll, Item)
+	}
+}
+
 //...
 // GetData
 func GetDataCassette(cs string) []string {

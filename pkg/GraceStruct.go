@@ -62,6 +62,34 @@ type EbpErr struct {
 	BpCode string
 }
 
+type GraceAll struct {
+	PsCode,
+	PsNum,
+	Ps1,
+	FoNumTube1,
+	FoNintub1,
+	CbEti1,
+	Ps2,
+	FoNumTube2,
+	FoNintub2,
+	CbEti2,
+	PsCsCode,
+	CsNum,
+	BpEti,
+	PsTiCode,
+	TiEti,
+	PsType,
+	PsFunc,
+	PsState,
+	PsPreaff,
+	PsComment,
+	PsCreaDate,
+	PsMajDate,
+	PsMajSrc,
+	PsAbdDate,
+	PsAbdSrc string
+}
+
 var (
 	Wba        *excelize.File
 	fitToWidth excelize.FitToWidth
@@ -86,4 +114,6 @@ var (
 
 	TPositionErr []PositionErr
 	TEbpErr      []EbpErr
+
+	TGraceAll []GraceAll
 )
