@@ -363,6 +363,61 @@ func appendGraceAll() {
 	}
 }
 
+func appendGraceLight() {
+	for _, pos := range TPosition {
+
+		cs := GetDataCassette(pos.PsCsCode)
+		bp := GetDataEbp(cs[1])
+
+		orderInt := 0
+		if len(bp) > 1 {
+
+			pb := "1"
+			if bp[0:3] == "BPE" {
+				pb = "2"
+			} else if bp[0:3] == "PBO" {
+				pb = "3"
+			} else {
+				pb = "4"
+			}
+
+			concat := pb + bp[len(bp)-3:] + cs[0]
+
+			a, err := strconv.Atoi(concat)
+			if err != nil {
+				a = 0
+			}
+
+			orderInt = a
+		}
+
+		PsNumInt, _ := strconv.Atoi(pos.PsNum)
+		CsNumInt, _ := strconv.Atoi(cs[0])
+
+		Item := GraceLight{
+			PsCode:     pos.PsCode,
+			PsNum:      PsNumInt,
+			Ps1:        pos.Ps1,
+			Ps2:        pos.Ps2,
+			PsCsCode:   pos.PsCsCode,
+			CsNum:      CsNumInt,
+			BpEti:      bp,
+			PsType:     pos.PsType,
+			PsFunc:     pos.PsFunc,
+			PsState:    pos.PsState,
+			PsPreaff:   pos.PsPreaff,
+			PsComment:  pos.PsComment,
+			PsCreaDate: pos.PsCreaDate,
+			PsMajDate:  pos.PsMajDate,
+			PsMajSrc:   pos.PsMajSrc,
+			PsAbdDate:  pos.PsAbdDate,
+			PsAbdSrc:   pos.PsAbdSrc,
+			OrderInt:   orderInt,
+		}
+		TGraceLight = append(TGraceLight, Item)
+	}
+}
+
 //...
 // GetData
 func GetDataCassette(cs string) []string {

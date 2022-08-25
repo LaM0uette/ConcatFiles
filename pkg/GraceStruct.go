@@ -90,6 +90,26 @@ type GraceAll struct {
 	PsAbdSrc string
 	OrderInt int
 }
+type GraceLight struct {
+	PsCode   string
+	PsNum    int
+	Ps1      string
+	Ps2      string
+	PsCsCode string
+	CsNum    int
+	BpEti,
+	PsType,
+	PsFunc,
+	PsState,
+	PsPreaff,
+	PsComment,
+	PsCreaDate,
+	PsMajDate,
+	PsMajSrc,
+	PsAbdDate,
+	PsAbdSrc string
+	OrderInt int
+}
 
 var (
 	Wba        *excelize.File
@@ -116,5 +136,6 @@ var (
 	TPositionErr []PositionErr
 	TEbpErr      []EbpErr
 
-	TGraceAll []GraceAll
+	TGraceAll   []GraceAll
+	TGraceLight []GraceLight
 )
