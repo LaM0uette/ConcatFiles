@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/qax-os/excelize"
 	"path"
+	"sort"
 	"strconv"
 )
 
@@ -55,9 +56,9 @@ func (d *Data) countPositions() {
 }
 
 func sortPosition() {
-	//sort.Slice(planets, func(i, j int) bool {
-	//	return planets[i].Axis < planets[j].Axis
-	//})
+	sort.Slice(TPosition, func(i, j int) bool {
+		return TPosition[i].PsCode < TPosition[j].PsCode
+	})
 }
 
 func (d *Data) appendDatasInStructs() {
