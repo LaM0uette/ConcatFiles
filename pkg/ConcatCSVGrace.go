@@ -70,50 +70,46 @@ func (d *Data) appendDatasInStructs() {
 }
 
 func (d *Data) runConcatGrace(file string) {
-	CsvData := ReadCSV(file)
 	Sht := "Sheet1"
 	NbrTot := 0
 
-	for r, val := range CsvData {
+	for r, pos := range TPosition {
 		r++
 
-		fo1 := GetDataFibre(val[2])   //ps1 et cb1
-		fo2 := GetDataFibre(val[3])   //ps2 et cb2
-		cs := GetDataCassette(val[4]) //psCsCode
-		bp := GetDataEbp(cs[1])       //csCode
-		ti := GetDataTirroir(val[5])  //tiCode
+		fo1 := GetDataFibre(pos.Ps1)
+		fo2 := GetDataFibre(pos.Ps2)
+		cs := GetDataCassette(pos.PsCode)
+		bp := GetDataEbp(cs[1])
+		ti := GetDataTirroir(pos.PsTiCode)
 
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("A%v", r), val[0])  //PsCode
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("B%v", r), val[1])  //PsNum
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("C%v", r), val[2])  //Ps1
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("D%v", r), fo1[0])  //FoNumTube1
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("E%v", r), fo1[1])  //FoColor1
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("F%v", r), fo1[2])  //CbEti1
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("G%v", r), val[3])  //Ps2
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("H%v", r), fo2[0])  //FoNumTube2
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("I%v", r), fo2[1])  //FoColor2
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("J%v", r), fo2[2])  //CbEti2
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("K%v", r), val[4])  //PsCsCode
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("L%v", r), cs[0])   //CsNum
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("M%v", r), bp)      //BpEti
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("N%v", r), val[5])  //PsTiCode
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("O%v", r), ti)      //TiEti
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("P%v", r), val[6])  //PsType
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("Q%v", r), val[7])  //PsFunc
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("R%v", r), val[8])  //PsState
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("S%v", r), val[9])  //PsPreaff
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("T%v", r), val[10]) //PsComment
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("U%v", r), val[11]) //PsCreaDate
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("V%v", r), val[12]) //PsMajDate
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("W%v", r), val[13]) //PsMajSrc
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("X%v", r), val[14]) //PsAbdDate
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("Y%v", r), val[15]) //PsAbdSrc
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("A%v", r), pos.PsCode)     //PsCode
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("B%v", r), pos.PsNum)      //PsNum
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("C%v", r), pos.Ps1)        //Ps1
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("D%v", r), fo1[0])         //FoNumTube1
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("E%v", r), fo1[1])         //FoColor1
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("F%v", r), fo1[2])         //CbEti1
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("G%v", r), pos.Ps2)        //Ps2
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("H%v", r), fo2[0])         //FoNumTube2
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("I%v", r), fo2[1])         //FoColor2
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("J%v", r), fo2[2])         //CbEti2
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("K%v", r), pos.PsCode)     //PsCsCode
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("L%v", r), cs[0])          //CsNum
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("M%v", r), bp)             //BpEti
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("N%v", r), pos.PsTiCode)   //PsTiCode
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("O%v", r), ti)             //TiEti
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("P%v", r), pos.PsType)     //PsType
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("Q%v", r), pos.PsFunc)     //PsFunc
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("R%v", r), pos.PsState)    //PsState
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("S%v", r), pos.PsPreaff)   //PsPreaff
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("T%v", r), pos.PsComment)  //PsComment
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("U%v", r), pos.PsCreaDate) //PsCreaDate
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("V%v", r), pos.PsMajDate)  //PsMajDate
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("W%v", r), pos.PsMajSrc)   //PsMajSrc
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("X%v", r), pos.PsAbdDate)  //PsAbdDate
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("Y%v", r), pos.PsAbdSrc)   //PsAbdSrc
 
 		if len(TPositionErr) > 0 {
-			if checkPosErr(val[0]) {
-				//style := xlsx.NewStyle()
-				//style.Font.Color = "FFC000"
-
+			if checkPosErr(pos.PsCode) {
 				style, _ := Wba.NewStyle(fmt.Sprintf("{\"fill\":{\"type\":\"pattern\",\"color\":[\"#%s\"],\"pattern\":1}}", "FFC000"))
 				_ = Wba.SetCellStyle(Sht, fmt.Sprintf("A%v", r), fmt.Sprintf("A%v", r), style)
 			}
