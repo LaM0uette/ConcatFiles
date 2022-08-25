@@ -87,8 +87,8 @@ type GraceAll struct {
 	PsMajDate,
 	PsMajSrc,
 	PsAbdDate,
-	PsAbdSrc,
-	OrderStr string
+	PsAbdSrc string
+	OrderInt int
 }
 
 var (

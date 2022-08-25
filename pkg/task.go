@@ -302,6 +302,28 @@ func appendGraceAll() {
 		bp := GetDataEbp(cs[1])
 		ti := GetDataTirroir(pos.PsTiCode)
 
+		orderInt := 0
+		if len(bp) > 1 {
+
+			pb := "1"
+			if bp[0:3] == "BPE" {
+				pb = "2"
+			} else if bp[0:3] == "PBO" {
+				pb = "3"
+			} else {
+				pb = "4"
+			}
+
+			concat := pb + bp[len(bp)-3:] + cs[0]
+
+			a, err := strconv.Atoi(concat)
+			if err != nil {
+				a = 0
+			}
+
+			orderInt = a
+		}
+
 		Item := GraceAll{
 			PsCode:     pos.PsCode,
 			PsNum:      pos.PsNum,
@@ -328,7 +350,7 @@ func appendGraceAll() {
 			PsMajSrc:   pos.PsMajSrc,
 			PsAbdDate:  pos.PsAbdDate,
 			PsAbdSrc:   pos.PsAbdSrc,
-			OrderStr:   fmt.Sprintf("%s_%s", bp, cs[0]),
+			OrderInt:   orderInt,
 		}
 		TGraceAll = append(TGraceAll, Item)
 	}
