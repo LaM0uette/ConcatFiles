@@ -10,7 +10,6 @@ import (
 	"os"
 	"path"
 	"path/filepath"
-	"sort"
 	"strconv"
 	"strings"
 )
@@ -222,10 +221,6 @@ func appendFibre(file string) {
 		}
 		TFibre = append(TFibre, Item)
 	}
-
-	sort.Slice(TFibre, func(i, j int) bool {
-		return TFibre[i].FoNumTube < TFibre[j].FoNumTube
-	})
 }
 
 func appendPosition(file string) {
