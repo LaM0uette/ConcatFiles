@@ -61,6 +61,7 @@ func sortPosition() {
 }
 
 func (d *Data) appendDatasInStructs() {
+	appendPosition(path.Join(d.DstFile, NameTPosition))
 	appendFibre(path.Join(d.DstFile, NameTFibre))
 	appendCable(path.Join(d.DstFile, NameTCable))
 	appendCassette(path.Join(d.DstFile, NameTCassette))

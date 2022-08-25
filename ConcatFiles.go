@@ -30,9 +30,8 @@ func main() {
 	pkg.DrawStart(txtMode)
 	pkg.DrawSep("BUILD")
 
-	//srcFile := "C:\\Users\\XD5965\\OneDrive - EQUANS\\Bureau\\DLG"
-	//srcFile := "C:\\Users\\XD5965\\OneDrive - EQUANS\\Bureau\\EBP"
-	srcFile := pkg.GetCurrentDir()
+	srcFile := "C:\\Users\\XD5965\\OneDrive - EQUANS\\Bureau\\REC-DLG-47-CAST-ANT1-01-V2"
+	//srcFile := pkg.GetCurrentDir()
 	dstFile := path.Join(srcFile, "__Concat__")
 	xlFile := path.Join(dstFile, fmt.Sprintf("__Export%s_%v.xlsm", txtMode, time.Now().Format("20060102150405")))
 

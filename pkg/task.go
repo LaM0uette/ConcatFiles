@@ -223,6 +223,32 @@ func appendFibre(file string) {
 	}
 }
 
+func appendPosition(file string) {
+	Csv := ReadCSV(file)
+
+	for _, val := range Csv {
+		Item := Position{
+			PsCode:     val[0],
+			PsNum:      val[1],
+			Ps1:        val[2],
+			Ps2:        val[3],
+			PsCsCode:   val[4],
+			PsTiCode:   val[5],
+			PsType:     val[6],
+			PsFunc:     val[7],
+			PsState:    val[8],
+			PsPreaff:   val[9],
+			PsComment:  val[10],
+			PsCreaDate: val[11],
+			PsMajDate:  val[12],
+			PsMajSrc:   val[13],
+			PsAbdDate:  val[14],
+			PsAbdSrc:   val[15],
+		}
+		TPosition = append(TPosition, Item)
+	}
+}
+
 func appendPtech(file string) {
 	Csv := ReadCSV(file)
 

@@ -22,8 +22,8 @@ type Fibre struct {
 	FoCbCode string
 }
 type Position struct {
-	PsCode string
-	PsNum  int
+	PsCode,
+	PsNum,
 	Ps1,
 	Ps2,
 	PsCsCode,
