@@ -15,7 +15,7 @@ import (
 )
 
 func main() {
-	FlgMode := flag.String("m", "jointureGrace", "Mode de compilation")
+	FlgMode := flag.String("m", "jointureGraceLight", "Mode de compilation")
 	//jointureEbp
 	flag.Parse()
 
@@ -48,6 +48,9 @@ func main() {
 	case "jointureGrace":
 		d.CopyExcelFile(path.Join(config.PathXlsm, "MJG.xlsm"))
 		d.ConcatCSVGrace()
+	case "jointureGraceLight":
+		d.CopyExcelFile(path.Join(config.PathXlsm, "MJGLight.xlsm"))
+		d.ConcatCSVGraceLight()
 	case "jointureEbp":
 		d.CopyExcelFile(path.Join(config.PathXlsm, "MJEbp.xlsm"))
 		d.ConcatCSVEbp()
