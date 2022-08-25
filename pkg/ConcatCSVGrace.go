@@ -89,7 +89,7 @@ func (d *Data) runConcatGrace() {
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("H%v", r), dt.FoNumTube2)
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("I%v", r), dt.FoNintub2)
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("J%v", r), dt.CbEti2)
-		_ = Wba.SetCellValue(Sht, fmt.Sprintf("K%v", r), dt.PsCode)
+		_ = Wba.SetCellValue(Sht, fmt.Sprintf("K%v", r), dt.PsCsCode)
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("L%v", r), dt.CsNum)
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("M%v", r), dt.BpEti)
 		_ = Wba.SetCellValue(Sht, fmt.Sprintf("N%v", r), dt.PsTiCode)
