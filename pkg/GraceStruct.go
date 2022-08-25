@@ -63,18 +63,18 @@ type EbpErr struct {
 }
 
 type GraceAll struct {
-	PsCode,
-	PsNum,
-	Ps1,
-	FoNumTube1,
-	FoNintub1,
+	PsCode     string
+	PsNum      int
+	Ps1        string
+	FoNumTube1 int
+	FoNintub1  int
 	CbEti1,
-	Ps2,
-	FoNumTube2,
-	FoNintub2,
+	Ps2 string
+	FoNumTube2 int
+	FoNintub2  int
 	CbEti2,
-	PsCsCode,
-	CsNum,
+	PsCsCode string
+	CsNum int
 	BpEti,
 	PsTiCode,
 	TiEti,

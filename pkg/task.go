@@ -324,19 +324,26 @@ func appendGraceAll() {
 			orderInt = a
 		}
 
+		PsNumInt, _ := strconv.Atoi(pos.PsNum)
+		FoNumTube1Int, _ := strconv.Atoi(fo1[0])
+		FoNintub1Int, _ := strconv.Atoi(fo1[1])
+		FoNumTube2Int, _ := strconv.Atoi(fo2[0])
+		FoNintub2Int, _ := strconv.Atoi(fo2[1])
+		CsNumInt, _ := strconv.Atoi(cs[0])
+
 		Item := GraceAll{
 			PsCode:     pos.PsCode,
-			PsNum:      pos.PsNum,
+			PsNum:      PsNumInt,
 			Ps1:        pos.Ps1,
-			FoNumTube1: fo1[0],
-			FoNintub1:  fo1[1],
+			FoNumTube1: FoNumTube1Int,
+			FoNintub1:  FoNintub1Int,
 			CbEti1:     fo1[2],
 			Ps2:        pos.Ps2,
-			FoNumTube2: fo2[0],
-			FoNintub2:  fo2[1],
+			FoNumTube2: FoNumTube2Int,
+			FoNintub2:  FoNintub2Int,
 			CbEti2:     fo2[2],
 			PsCsCode:   pos.PsCsCode,
-			CsNum:      cs[0],
+			CsNum:      CsNumInt,
 			BpEti:      bp,
 			PsTiCode:   pos.PsTiCode,
 			TiEti:      ti,
