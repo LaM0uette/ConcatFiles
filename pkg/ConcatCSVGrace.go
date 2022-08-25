@@ -24,6 +24,9 @@ func (d *Data) ConcatCSVGrace() {
 	d.appendDatasInStructs()
 	DrawParam("AJOUT DES DONNÉES DANS LES STRUCTS:", "OK")
 
+	sortPosition()
+	DrawParam("TRIAGE DES DONNÉES:", "OK")
+
 	DrawSep("COMPILATION")
 	d.runConcatGrace(path.Join(d.DstFile, NameTPosition))
 
@@ -49,6 +52,12 @@ func (d *Data) countPositions() {
 	tPositionPath := path.Join(d.DstFile, NameTPosition)
 	CsvData := ReadCSV(tPositionPath)
 	d.NbrItems = len(CsvData)
+}
+
+func sortPosition() {
+	//sort.Slice(planets, func(i, j int) bool {
+	//	return planets[i].Axis < planets[j].Axis
+	//})
 }
 
 func (d *Data) appendDatasInStructs() {
