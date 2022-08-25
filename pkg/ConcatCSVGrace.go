@@ -57,7 +57,7 @@ func (d *Data) countPositions() {
 
 func sortData() {
 	sort.Slice(TGraceAll, func(i, j int) bool {
-		return TGraceAll[i].BpEti < TGraceAll[j].BpEti && TGraceAll[i].CsNum < TGraceAll[j].CsNum
+		return TGraceAll[i].BpEti < TGraceAll[j].BpEti
 	})
 }
 

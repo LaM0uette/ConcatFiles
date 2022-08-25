@@ -10,6 +10,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -195,6 +196,10 @@ func appendCassette(file string) {
 		}
 		TCassette = append(TCassette, Item)
 	}
+
+	sort.Slice(TCassette, func(i, j int) bool {
+		return TCassette[i].CsNum < TCassette[j].CsNum
+	})
 }
 
 func appendEbp(file string) {
@@ -207,6 +212,10 @@ func appendEbp(file string) {
 		}
 		TEbp = append(TEbp, Item)
 	}
+
+	sort.Slice(TEbp, func(i, j int) bool {
+		return TEbp[i].BpEti < TEbp[j].BpEti
+	})
 }
 
 func appendFibre(file string) {
@@ -221,6 +230,10 @@ func appendFibre(file string) {
 		}
 		TFibre = append(TFibre, Item)
 	}
+
+	sort.Slice(TFibre, func(i, j int) bool {
+		return TFibre[i].FoNumTube < TFibre[j].FoNumTube
+	})
 }
 
 func appendPosition(file string) {
@@ -247,6 +260,10 @@ func appendPosition(file string) {
 		}
 		TPosition = append(TPosition, Item)
 	}
+
+	sort.Slice(TPosition, func(i, j int) bool {
+		return TPosition[i].PsNum < TPosition[j].PsNum
+	})
 }
 
 func appendPtech(file string) {
@@ -308,7 +325,7 @@ func appendGraceAll() {
 			FoNumTube2: fo2[0],
 			FoNintub2:  fo2[1],
 			CbEti2:     fo2[2],
-			PsCsCode:   pos.PsCode,
+			PsCsCode:   pos.PsCsCode,
 			CsNum:      cs[0],
 			BpEti:      bp,
 			PsTiCode:   pos.PsTiCode,
