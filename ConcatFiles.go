@@ -15,7 +15,7 @@ import (
 )
 
 func main() {
-	FlgMode := flag.String("m", "jointureGraceLight", "Mode de compilation")
+	FlgMode := flag.String("m", "jointureGrace", "Mode de compilation")
 	//jointureEbp
 	flag.Parse()
 
@@ -32,10 +32,12 @@ func main() {
 	pkg.DrawStart(txtMode)
 	pkg.DrawSep("BUILD")
 
-	//srcFile := "C:\\Users\\XD5965\\OneDrive - EQUANS\\Bureau\\Nouveau dossier"
+	//srcFile := "T:\\RIP FTTH\\GEOMAP\\5_EXPORTS\\RIP47\\NRO7_PM3_MIR2\\EXE\\V2\\DLG"
 	srcFile := pkg.GetCurrentDir()
 	dstFile := path.Join(srcFile, "__Concat__")
-	xlFile := path.Join(dstFile, fmt.Sprintf("__Export%s_%v.xlsm", txtMode, time.Now().Format("20060102150405")))
+
+	timestamp := time.Now().Format("20060102150405")
+	xlFile := path.Join(dstFile, fmt.Sprintf("__Export%s_%v.xlsm", txtMode, timestamp))
 
 	d := pkg.Data{
 		SrcFile: srcFile,
@@ -49,9 +51,11 @@ func main() {
 	switch *FlgMode {
 	case "jointureGrace":
 		d.CopyExcelFile(path.Join(config.PathXlsm, "MJG.xlsm"))
+		pkg.CopyFile(path.Join(config.PathDocs, "DLG.qgs"), path.Join(d.DstFile, fmt.Sprintf("__DLG_%v.qgs", timestamp)))
 		d.ConcatCSVGrace()
 	case "jointureGraceLight":
 		d.CopyExcelFile(path.Join(config.PathXlsm, "MJGLight.xlsm"))
+		pkg.CopyFile(path.Join(config.PathDocs, "DLG.qgs"), path.Join(d.DstFile, fmt.Sprintf("__DLG_%v.qgs", timestamp)))
 		d.ConcatCSVGraceLight()
 	case "jointureEbp":
 		d.CopyExcelFile(path.Join(config.PathXlsm, "MJEbp.xlsm"))
