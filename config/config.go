@@ -9,10 +9,10 @@ import (
 const (
 	Name    = "ConcatFiles"
 	Author  = "LaM0uette"
-	Version = "1.6.2"
+	Version = "1.6.3"
 
 	PathXlsm = "T:\\- 4 Suivi Appuis\\26_MACROS\\GeoMap\\ConcatFiles\\Docs"
-	PathDocs = "T:\\- 4 Suivi Appuis\\26_MACROS\\GeoMap\\Docs"
+	PathDocs = "T:\\- 11 Outils\\GeoMap\\Docs"
 )
 
 var (
