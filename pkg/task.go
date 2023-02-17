@@ -6,6 +6,7 @@ import (
 	"encoding/csv"
 	"fmt"
 	"github.com/tealeg/xlsx"
+	"io"
 	"io/ioutil"
 	"os"
 	"path"
@@ -48,6 +49,78 @@ func CopyFile(srcFile, dstFile string) {
 	if err != nil {
 		loger.Error("Erreur durant la copie du fichier (coller)", err)
 	}
+}
+
+func CopyDir(source string, dest string) error {
+	// Ouvre le dossier source
+	sourceInfo, err := os.Stat(source)
+	if err != nil {
+		return err
+	}
+	if !sourceInfo.IsDir() {
+		return &SourceNotDirectoryError{source}
+	}
+
+	// Crée le dossier de destination s'il n'existe pas encore
+	err = os.MkdirAll(dest, sourceInfo.Mode())
+	if err != nil {
+		return err
+	}
+
+	// Parcours les fichiers du dossier source
+	directory, err := os.Open(source)
+	if err != nil {
+		return err
+	}
+	defer directory.Close()
+
+	files, err := directory.Readdir(-1)
+	if err != nil {
+		return err
+	}
+
+	// Copie le contenu de chaque fichier vers le dossier de destination
+	for _, file := range files {
+		sourceFile := source + "/" + file.Name()
+		destFile := dest + "/" + file.Name()
+
+		if file.IsDir() {
+			// Copie le sous-dossier récursivement
+			err = CopyDir(sourceFile, destFile)
+			if err != nil {
+				return err
+			}
+		} else {
+			// Copie le fichier
+			sourceStream, err := os.Open(sourceFile)
+			if err != nil {
+				return err
+			}
+			defer sourceStream.Close()
+
+			destStream, err := os.Create(destFile)
+			if err != nil {
+				return err
+			}
+			defer destStream.Close()
+
+			_, err = io.Copy(destStream, sourceStream)
+			if err != nil {
+				return err
+			}
+		}
+	}
+
+	return nil
+}
+
+// Erreur pour signaler que la source n'est pas un dossier
+type SourceNotDirectoryError struct {
+	source string
+}
+
+func (e *SourceNotDirectoryError) Error() string {
+	return "Source '" + e.source + "' is not a directory"
 }
 
 func ReadCSV(file string) [][]string {

@@ -32,7 +32,7 @@ func main() {
 	pkg.DrawStart(txtMode)
 	pkg.DrawSep("BUILD")
 
-	//srcFile := "T:\\RIP FTTH\\GEOMAP\\5_EXPORTS\\RIP47\\NRO7_PM3_MIR2\\EXE\\V2\\DLG"
+	//srcFile := "T:\\RIP FTTH\\GEOMAP\\5_EXPORTS\\GeoTools\\RIP24\\NRO38_PM8_BIMI\\DOE_70%\\1-V1\\DLG"
 	srcFile := pkg.GetCurrentDir()
 	dstFile := path.Join(srcFile, "__Concat__")
 
@@ -52,10 +52,18 @@ func main() {
 	case "jointureGrace":
 		d.CopyExcelFile(path.Join(config.PathXlsm, "MJG.xlsm"))
 		pkg.CopyFile(path.Join(config.PathDocs, "DLG.qgs"), path.Join(d.DstFile, fmt.Sprintf("__DLG_%v.qgs", timestamp)))
+		err := pkg.CopyDir(path.Join(config.PathDocs, "CARTO"), path.Join(d.DstFile, "CARTO"))
+		if err != nil {
+			return
+		}
 		d.ConcatCSVGrace()
 	case "jointureGraceLight":
 		d.CopyExcelFile(path.Join(config.PathXlsm, "MJGLight.xlsm"))
 		pkg.CopyFile(path.Join(config.PathDocs, "DLG.qgs"), path.Join(d.DstFile, fmt.Sprintf("__DLG_%v.qgs", timestamp)))
+		err := pkg.CopyDir(path.Join(config.PathDocs, "CARTO"), path.Join(d.DstFile, "CARTO"))
+		if err != nil {
+			return
+		}
 		d.ConcatCSVGraceLight()
 	case "jointureEbp":
 		d.CopyExcelFile(path.Join(config.PathXlsm, "MJEbp.xlsm"))
